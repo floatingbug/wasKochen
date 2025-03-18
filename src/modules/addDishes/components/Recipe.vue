@@ -39,10 +39,6 @@ import dish from "../store/dishStore.js";
 	padding: 1rem;
 }
 
-.content {
-	width: 80%;
-}
-
 .recept-name {
 	padding: 2rem 0;
 }

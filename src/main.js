@@ -35,7 +35,6 @@ app.use(router)
 
 app.component("Button", Button);
 app.component("Divider", Divider);
-app.component("Divider", Divider);
 app.component("InputText", InputText);
 app.component("InputGroup", InputGroup);
 app.component("InputGroupAddon", InputGroupAddon);

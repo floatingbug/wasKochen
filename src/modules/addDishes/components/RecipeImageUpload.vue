@@ -1,6 +1,7 @@
 <script setup>
 import {ref} from "vue";
 import dishStore from "../store/dishStore.js";
+import {dishImage} from "../store/dishStore.js";
 
 
 const value = ref("");
@@ -10,7 +11,7 @@ const previewUrl = ref(null);
 async function storeImage(event){
 	const file = event.target.files[0];
 	if(!file) return
-	dishStore.dishImage = file;
+	dishImage.value = file;
 	dishStore.dishImageUrl = URL.createObjectURL(file);
 }
 
@@ -21,7 +22,7 @@ async function storeImage(event){
 	<div class="file-upload-container">
 		<div class="file-upload-content">
 			<InputText type="file" @change="storeImage"></InputText>
-			<img v-if="previewUrl" :src="previewUrl" alt="Bildvorschau" style="max-width: 200px; margin-top: 10px;" />
+			<img v-if="dishStore.dishImageUrl" :src="dishStore.dishImageUrl" alt="Bildvorschau" style="max-width: 200px; margin-top: 10px;" />
 		</div>
 	</div>
 </template>

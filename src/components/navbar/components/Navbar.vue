@@ -19,7 +19,7 @@
 				</li>
 				
 				<li>
-					<Button>Gerichte finden</Button>
+					<Button as="router-link" to="/find-dishes">Gerichte finden</Button>
 				</li>
 				
 				<li>

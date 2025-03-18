@@ -13,5 +13,7 @@ import dish from "../store/dishStore.js";
 
 
 <style scoped>
-
+.preparation-container {
+	width: 100%;
+}
 </style>

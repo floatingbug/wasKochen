@@ -37,7 +37,7 @@ function closeNavbar(event){
 			</li>
 		
 			<li class="menu-button-container">
-				<Button>
+				<Button as="router-link" to="/find-dishes">
 					Gerichte finden
 				</Button>
 			</li>

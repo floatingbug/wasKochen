@@ -1,5 +1,7 @@
-import {reactive} from "vue";
+import {ref, reactive} from "vue";
 
+
+const dishImage = ref(null);
 
 const dish = reactive({
 	recipeName: "testname",
@@ -12,9 +14,9 @@ const dish = reactive({
 	],
 	preparation: "asedf",
 	categories: ["schnell"],
-	dishImage: null,
-	dishImgUrl: "",
+	dishImageUrl: "",
 });
 
 
+export {dishImage}
 export default dish;

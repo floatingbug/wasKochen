@@ -5,7 +5,9 @@ import defaultDishImage from "@/assets/dish_pictures/default_dish.jpg";
 
 
 onMounted(() => {
-	if(!dishStore.dishImageUrl) dishStore.dishImageUrl = defaultDishImage;
+	if(!dishStore.dishImageUrl){
+	   	dishStore.dishImageUrl = defaultDishImage;
+	}
 });
 
 </script>
