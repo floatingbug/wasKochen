@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import dashboardRoutes from "../modules/dashboard/router/index.js";
 import addDishRoutes from "../modules/addDishes/router/index.js";
 import findDishesRoutes from "../modules/findDishes/router/index.js";
+import dishPageRoutes from "../modules/dishPage/router/index.js";
+import manageDishesRoutes from "../modules/manageDishes/router/index.js";
 
 
 const router = createRouter({
@@ -10,6 +12,8 @@ const router = createRouter({
 	  ...dashboardRoutes,
 	  ...addDishRoutes,
 	  ...findDishesRoutes,
+	  ...dishPageRoutes,
+	  ...manageDishesRoutes,
   ],
 })
 

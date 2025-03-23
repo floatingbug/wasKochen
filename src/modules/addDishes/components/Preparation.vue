@@ -1,5 +1,5 @@
 <script setup>
-import dish from "../store/dishStore.js";
+import dish from "@/stores/dishStore.js";
 </script>
 
 

@@ -1,7 +1,7 @@
 <script setup>
 import {ref} from "vue";
 import Select from "primevue/select";
-import dish from "../store/dishStore.js";
+import dish from "@/stores/dishStore.js";
 
 
 const units = ref([

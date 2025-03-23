@@ -6,7 +6,7 @@
 	<nav>
 		<ul class="menu-container card-bg-glass">
 			<div class="container-left">
-				<span>kochWas</span>
+				<span>wasKochen</span>
 			</div>
 
 			<div class="container-right">
@@ -23,7 +23,7 @@
 				</li>
 				
 				<li>
-					<Button>Gerichte verwalten</Button>
+					<Button as="router-link" to="/manage-dishes">Gerichte verwalten</Button>
 				</li>
 			</div>
 		</ul>

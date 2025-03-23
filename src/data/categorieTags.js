@@ -1,7 +1,4 @@
-import {ref} from "vue";
-
-
-const categorieTags = ref([
+const categorieTags = [
 	{
 		label: "Lieblingsessen",
 		id: "favorite_food",
@@ -107,7 +104,7 @@ const categorieTags = ref([
 		id: "contains_meat",
 		isSelected: false
 	}
-]);
+];
 
 
 export default categorieTags;

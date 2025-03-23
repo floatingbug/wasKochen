@@ -19,7 +19,7 @@ function closeNavbar(event){
 			@click="closeNavbar"
 		>
 			<li>
-				<h1>kochWas Menü</h1>
+				<h1>wasKochen Menü</h1>
 			</li>
 
 			<Divider></Divider>
@@ -43,7 +43,7 @@ function closeNavbar(event){
 			</li>
 		
 			<li class="menu-button-container">
-				<Button>
+				<Button as="router-link" to="/manage-dishes">
 					Gerichte verwalten
 				</Button>
 			</li>

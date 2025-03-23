@@ -1,7 +1,7 @@
 <script setup>
 import {ref} from "vue";
-import dishStore from "../store/dishStore.js";
-import {dishImage} from "../store/dishStore.js";
+import dishStore from "@/stores/dishStore.js";
+import {dishImage} from "@/stores/dishStore.js";
 
 
 const value = ref("");

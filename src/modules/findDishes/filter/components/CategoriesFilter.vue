@@ -6,21 +6,6 @@ const emit = defineEmits(["categoriesFilter:action"]);
 
 
 const categories = ref([
-	{
-    "label": "Schwierigkeitsgrad",
-    "id": "difficulty",
-	"isSelected": false,
-  },
-  {
-    "label": "Zubereitungszeit",
-    "id": "preparation_time",
-    "isSelected": false
-  },
-  {
-    "label": "Kilokalorien",
-    "id": "calories",
-    "isSelected": false
-  },
   {
     "label": "Lieblingsessen",
     "id": "favorite_food",
@@ -64,16 +49,6 @@ const categories = ref([
   {
     "label": "Festtagsgericht",
     "id": "holiday_meal",
-    "isSelected": false
-  },
-  {
-    "label": "Meal Prep",
-    "id": "meal_prep",
-    "isSelected": false
-  },
-  {
-    "label": "Einfrierbar",
-    "id": "freezable",
     "isSelected": false
   },
   {
@@ -181,6 +156,11 @@ function handleCategorie(categorie){
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1rem;
+}
+
+.p-badge {
+	cursor: pointer;
+	user-select: none;
 }
 
 .selected-categorie {

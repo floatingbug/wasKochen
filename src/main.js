@@ -17,6 +17,7 @@ import FloatLabel from 'primevue/floatlabel';
 import InputNumber from 'primevue/inputnumber';
 import Textarea from 'primevue/textarea';
 import Badge from "primevue/badge";
+import ToastService from 'primevue/toastservice';
 
 
 const app = createApp(App)
@@ -32,6 +33,8 @@ app.use(PrimeVue, {
 });
 
 app.use(router)
+app.use(ToastService);
+
 
 app.component("Button", Button);
 app.component("Divider", Divider);

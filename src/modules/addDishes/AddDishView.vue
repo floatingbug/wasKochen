@@ -1,5 +1,6 @@
 <script setup>
 import {ref, toRaw} from "vue";
+import {useRouter} from "vue-router";
 import Stepper from 'primevue/stepper';
 import StepList from 'primevue/steplist';
 import StepPanels from 'primevue/steppanels';
@@ -11,12 +12,17 @@ import Preparation from "./components/Preparation.vue";
 import Categories from "./components/Categories.vue";
 import RecipeImageUpload from "./components/RecipeImageUpload.vue";
 import Preview from "./components/Preview.vue";
-import dishStore from "./store/dishStore.js";
-import {dishImage} from "./store/dishStore.js";
+import dishStore from "@/stores/dishStore.js";
+import {dishImage} from "@/stores/dishStore.js";
+import {foundDishes} from "@/stores/dishStore.js";
+
+
+const router = useRouter();
 
 
 async function saveDish(){
 	let dish = toRaw(dishStore);
+	let addedDish = null;
 
 	//store image on server
 	if(dishImage.value){
@@ -35,7 +41,7 @@ async function saveDish(){
 				return;
 			}
 
-			dish.dishImageUrl = `/upload/${result.data.filename}`;
+			dish.dishImageUrl = `/uploads/${result.data.filename}`;
 		}
 		catch(error){
 			console.log(error);
@@ -59,16 +65,15 @@ async function saveDish(){
 			return;
 		}
 
-		console.log(result);
+		addedDish = result.data.dish;
+		foundDishes.value.push(addedDish);
 	}
 	catch(error){
 		console.log(error);
 		return;
 	}
 
-}
-
-async function holder(){
+	router.push(`/dish-page?dishId=${addedDish.dishId}`);
 }
 
 </script>

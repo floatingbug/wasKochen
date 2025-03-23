@@ -1,6 +1,6 @@
 <script setup>
 import categorieTags from "../data/categorieTags.js";
-import dish from "../store/dishStore.js";
+import dish from "@/stores/dishStore.js";
 
 
 function addRemoveCategorie(index, categorie){
