@@ -23,7 +23,12 @@ onMounted(() => {
 			<h1>{{dish.dish.recipeName}}</h1>
 
 			<div class="image-container">
-				<img :src="`${API_URL}${dish.dish.dishImageUrl}`" alt="">
+				<img
+					v-if="dish.dish.dishImageUrl.startsWith('/src')"
+					:src="`${dish.dish.dishImageUrl}`" alt="">
+				<img
+					v-else
+					:src="`${API_URL}${dish.dish.dishImageUrl}`" alt="">
 			</div>
 
 			<Divider></Divider>
@@ -77,11 +82,11 @@ onMounted(() => {
 
 .dish {
 	width: 90%;
-	max-width: 1024px;
+	max-width: 400px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-top: 6rem;
+	margin-top: 4rem;
 }
 
 .ingredients-container {

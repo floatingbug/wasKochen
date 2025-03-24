@@ -1,7 +1,7 @@
 <script setup>
 import {ref, onMounted, watch} from "vue";
 import dishStore from "@/stores/dishStore.js";
-import defaultDishImage from "@/assets/dish_pictures/default_dish.jpg";
+import defaultDishImage from "@/public/dish_pictures/default_dish.jpg";
 import categorieTags from "../data/categorieTags.js";
 
 
@@ -16,7 +16,6 @@ onMounted(() => {
 
 
 watch(dishStore.categories, () => {
-	console.log(dishStore.categories);
 	categories.value = dishStore.categories.map(categorie => {
 		const categorieTag = categorieTags.value.find(categorieTag => categorieTag.id === categorie);
 		return categorieTag.label;
@@ -28,7 +27,7 @@ watch(dishStore.categories, () => {
 
 <template>    
 	<div class="container">
-		<div class="content card-bg-glass">
+		<div class="content">
 			<h1>{{dishStore.recipeName}}</h1>
 			
 			<div class="img-container">
@@ -77,14 +76,13 @@ watch(dishStore.categories, () => {
 }
 
 .content {
-	width: 50%;
-	min-width: 300px;
-	max-width: 400px;
+	width: 100%;
+	max-width: 300px;
 	padding: 0 1rem;
 }
 
 .img-container {
-	width: 30%;
+	width: 100%;
 	min-width: 150px;
 }
 
@@ -104,5 +102,8 @@ img {
 	flex-wrap: wrap;
 	gap: 1rem;
 	padding-bottom: 1rem;
+}
+
+@media(min-width: 480px){
 }
 </style>

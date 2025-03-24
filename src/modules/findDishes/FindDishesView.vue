@@ -67,8 +67,6 @@ function openDish(dishId){
 			<h1>Gerichte finden</h1>
 
 			<Filter></Filter>
-			
-			<Divider style="margin-bottom: 3rem;"></Divider>
 
 			<InputGroup>
 				<InputGroupAddon>
@@ -94,7 +92,12 @@ function openDish(dishId){
 					<h3>{{dish.dish.recipeName}}</h3>
 
 					<div class="image-container">
-						<img :src="`${API_URL}${dish.dish.dishImageUrl}`" alt="">
+						<img
+							v-if="dish.dish.dishImageUrl.startsWith('/src')"
+						   	:src="`${dish.dish.dishImageUrl}`" alt="">
+						<img
+							v-else
+						   	:src="`${API_URL}${dish.dish.dishImageUrl}`" alt="">
 					</div>
 
 					<div class="categories-container">
@@ -124,6 +127,7 @@ function openDish(dishId){
 
 .find-dishes-content {
 	width: 90%;
+	max-width: 1024px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -131,6 +135,7 @@ function openDish(dishId){
 }
 
 .dishes-container {
+	width: 100%;
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
@@ -139,15 +144,15 @@ function openDish(dishId){
 }
 
 .dish-card {
-	width: 300px;
-	height: 500px;
+	width: 90%;
+	max-width: 300px;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	cursor: pointer;
 	overflow: hidden;
 
 	h3 {
-		height: 50px;
 		text-align: center;
 	}
 }
@@ -161,7 +166,7 @@ h1 {
 }
 
 .image-container {
-	width: 300px;
+	width: 80%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -173,10 +178,11 @@ img {
 }
 
 .categories-container {
+	width: 80%;
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1rem;
 	padding: 1rem;
-	margin: auto;
+	margin: 1rem 0;
 }
 </style>

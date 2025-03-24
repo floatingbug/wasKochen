@@ -16,4 +16,9 @@ import dish from "@/stores/dishStore.js";
 .preparation-container {
 	width: 100%;
 }
+
+.p-textarea {
+	width: 95%;
+	min-height: 200px;
+}
 </style>

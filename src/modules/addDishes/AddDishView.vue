@@ -169,7 +169,7 @@ async function saveDish(){
 
 .add-dish-content {
 	width: 95%;
-	max-width: 1024px;
+	max-width: 600px;
 	margin-top: 6rem;
 	display: flex;
 	flex-direction: column;

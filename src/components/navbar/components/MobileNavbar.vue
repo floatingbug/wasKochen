@@ -101,6 +101,7 @@ nav {
 
 	.p-button {
 		width: 100%;
+		text-decoration: none;
 	}
 }
 
