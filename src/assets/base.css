@@ -2,4 +2,5 @@
 	--card-bg: var(--p-surface-500);
 	--border-color: rgb(from var(--p-orange-200) r g b / 10%);
 	--selected-color: rgb(from var(--p-orange-300) r g b / 100%);
+	--error-color: var(--p-red-400);
 }

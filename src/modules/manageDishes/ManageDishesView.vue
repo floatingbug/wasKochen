@@ -79,11 +79,13 @@ function editDish(dishId){
 }
 
 .dish-content {
-	width: 100%;
+	width: 90%;
+	min-width: 280px;
+	max-width: 1024px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	gap: 1rem;
+	gap: 2rem;
 	margin-top: 5rem;
 }
 </style>

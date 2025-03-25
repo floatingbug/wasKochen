@@ -3,6 +3,7 @@ import {ref, onMounted, watch} from "vue";
 import {useRouter} from "vue-router";
 import Filter from "./filter/Filter.vue";
 import {foundDishes} from "@/stores/dishStore.js";
+import DishCard from "@/components/DishCard.vue";
 
 
 const API_URL = ref(import.meta.env.VITE_API_URL);
@@ -85,29 +86,11 @@ function openDish(dishId){
 			<Divider style="margin-top: 3rem;"></Divider>
 
 			<div class="dishes-container">
-				<div class="dish-card card-bg-glass"
-					v-for="(dish, index) in foundDishes" :key="index"
+				<DishCard 
+					v-for="(dish, index) in foundDishes" :key="index" 
+					:dish="dish"
 					@click="openDish(dish.dishId)"
-				>
-					<h3>{{dish.dish.recipeName}}</h3>
-
-					<div class="image-container">
-						<img
-							v-if="dish.dish.dishImageUrl.startsWith('/src')"
-						   	:src="`${dish.dish.dishImageUrl}`" alt="">
-						<img
-							v-else
-						   	:src="`${API_URL}${dish.dish.dishImageUrl}`" alt="">
-					</div>
-
-					<div class="categories-container">
-						<Badge
-							v-for="(categorie, index) in dish.dish.categories" :key="index"
-						>
-							{{categorie}}
-						</Badge>
-					</div>
-				</div>
+				/>
 			</div>
 		</div>
 	</div>
@@ -143,46 +126,11 @@ function openDish(dishId){
 	margin-top: 4rem;
 }
 
-.dish-card {
-	width: 90%;
-	max-width: 300px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	cursor: pointer;
-	overflow: hidden;
-
-	h3 {
-		text-align: center;
-	}
-}
-
 h1 {
 	text-align: center;
 }
 
 .input-search-field {
 	margin-top: 2rem;
-}
-
-.image-container {
-	width: 80%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-img {
-	width: 80%;
-	max-height: 150px;
-}
-
-.categories-container {
-	width: 80%;
-	display: flex;
-	flex-wrap: wrap;
-	gap: 1rem;
-	padding: 1rem;
-	margin: 1rem 0;
 }
 </style>

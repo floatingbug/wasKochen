@@ -21,6 +21,21 @@ import dish from "@/stores/dishStore.js";
 				</FloatLabel>
 			</InputGroup>
 
+
+			<!-- Input for description -->
+			<div class="description">
+				<InputGroup>
+					<InputGroupAddon>
+						<i class="pi pi-file"></i>
+					</InputGroupAddon>
+
+					<FloatLabel variant="on">
+						<Textarea v-model="dish.description"></Textarea>
+						<label for="description">Kurze Beschreibung</label>
+					</FloatLabel>
+				</InputGroup>
+			</div>
+			
 			<Divider></Divider>
 
 			<!-- Additional Inputs -->
@@ -105,7 +120,16 @@ import dish from "@/stores/dishStore.js";
 }
 
 .recept-name {
-	padding: 2rem 0;
+	margin: 2rem 0;
+}
+
+.description {
+	width: 100%;
+	margin-bottom: 2rem;
+}
+
+.description .p-textarea {
+	width: 100%;
 }
 
 h3 {

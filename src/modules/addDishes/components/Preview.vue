@@ -28,14 +28,19 @@ watch(dishStore.categories, () => {
 <template>    
 	<div class="container">
 		<div class="content">
-			<h1>{{dishStore.recipeName}}</h1>
-			
 			<div class="img-container">
 				<img :src="dishStore.dishImageUrl" alt="dish image">
 			</div>
 			
-			<h3>Zutaten</h3>
+			<h1>{{dishStore.recipeName}}</h1>
+
+			<div class="description">
+				<h3>Beschreibung</h3>
+				{{dishStore.description}}
+			</div>
+			
 			<div class="ingredients-container">
+				<h3>Zutaten</h3>
 				<div 
 					class="ingredient"
 					v-for="(ingredient, index) in dishStore.ingredients"
@@ -45,21 +50,23 @@ watch(dishStore.categories, () => {
 				</div>
 			</div>
 			
-			<h3>Zubereitung</h3>
 			<div class="preparation-container">
+				<h3>Zubereitung</h3>
 				<div class="preparation">
 					{{dishStore.preparation}}
 				</div>
 			</div>
 			
-			<h3>Kategorien</h3>
 			<div class="categories-container">
-				<Badge
-					v-for="(categorie, index) in categories"
-					style="background-color: var(--selected-color)"
-				>
-					{{categorie}}
-				</Badge>
+				<h3>Kategorien</h3>
+				<div class="categories-content">
+					<Badge
+						v-for="(categorie, index) in categories"
+						style="background-color: var(--selected-color)"
+					>
+						{{categorie}}
+					</Badge>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -78,6 +85,9 @@ watch(dishStore.categories, () => {
 .content {
 	width: 100%;
 	max-width: 300px;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
 	padding: 0 1rem;
 }
 
@@ -97,6 +107,13 @@ img {
 }
 
 .categories-container {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.categories-content{
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;

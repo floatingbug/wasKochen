@@ -88,6 +88,10 @@ function closeDialog(){
 			<div class="dish-content">
 				<div class="menu-container">
 				</div>
+				
+				<div class="image-container">
+					<EditImage :dish="dish"></EditImage>
+				</div>
 
 				<h3>Gerichtname</h3>
 
@@ -95,12 +99,6 @@ function closeDialog(){
 					<EditDishName :dish="dish" @editDishName:action="handleEvents.editDishName"></EditDishName>
 				</div>
 				
-				<Divider></Divider>
-
-				<div class="image-container">
-					<EditImage :dish="dish"></EditImage>
-				</div>
-
 				<Divider></Divider>
 
 				<h3>Zutaten</h3>
@@ -160,20 +158,20 @@ h3 {
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
-	padding: 4rem;
+	padding: 1rem;
 }
 
 
 .preparation-container {
 	width: 100%;
-	padding: 4rem;
+	padding: 1rem;
 }
 
 .categories-container {
 	width: 80%;
 	min-width: 280px;
 	max-width: 800px;
-	padding: 4rem;
+	padding: 1rem;
 }
 
 .dish-header-container {
@@ -181,6 +179,6 @@ h3 {
 	display: flex;
 	flex-direction: column;
 	align-items: center; 
-	padding: 4rem;
+	padding: 1rem;
 }
 </style>

@@ -106,6 +106,7 @@ async function updateIngredientsAPI(){
 	.p-inputnumber {
 		width: 50px;
 	}
+
 	:deep(.p-inputnumber-input) {
 		flex: none;
 		width: 100px;

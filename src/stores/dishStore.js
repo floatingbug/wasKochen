@@ -7,6 +7,7 @@ const foundDishes = ref([]);
 
 const dish = reactive({
 	recipeName: "",
+	descriptions: "",
 	portions: 1,
 	difficulty: 1,
 	preparationTime: 0,

@@ -13,7 +13,10 @@ const API_URL = ref(import.meta.env.VITE_API_URL);
 
 
 <template>    
-	<img :src="`${API_URL}${dish.dish.dishImageUrl}`" alt="">
+	<img v-if="dish.dish.dishImageUrl.startsWith('/src')"
+		:src="`${dish.dish.dishImageUrl}`" alt="">
+	<img v-else)"
+		:src="`${API_URL}${dish.dish.dishImageUrl}`" alt="">
 </template>   
 
 

@@ -43,29 +43,33 @@ function removeIngredient(index){
 			v-for="(ingredient, index) in dish.ingredients"
 		>
 			<!-- Ingredient inputs -->
-			<div class="input-content quantity">
-				<span>Menge:</span>
-				<InputNumber v-model="ingredient.quantity"></InputNumber>
-			</div>
-		
-			<div class="input-content unit">
-				<span>Einheit:</span>
-				<Select v-model="ingredient.unit" :options="units" optionValue="id" optionLabel="name" placeholder="-" />
-			</div>
-		
-			<div class="input-content ingredient-name">
-				<span>Zutatenname:</span>
-				<InputText v-model="ingredient.ingredientName"></InputText>
+			<div class="input-left">
+				<div class="input-content quantity">
+					<span>Menge:</span>
+					<InputNumber v-model="ingredient.quantity"></InputNumber>
+				</div>
+				
+				<div class="input-content unit">
+					<span>Einheit:</span>
+					<Select v-model="ingredient.unit" :options="units" optionValue="id" optionLabel="name" placeholder="-" />
+				</div>
+				
+				<div class="input-content ingredient-name">
+					<span>Zutatenname:</span>
+					<InputText v-model="ingredient.ingredientName"></InputText>
+				</div>
 			</div>
 			
 			<!-- button for removing the ingredient -->
-			<Button
-				variant="text"
-				severity="danger"
-				@click="removeIngredient(index)"
-			>
-				<i class="pi pi-trash"></i>
-			</Button>
+			<div class="input-right">
+				<Button
+					variant="text"
+					severity="danger"
+					@click="removeIngredient(index)"
+				>
+					<i class="pi pi-trash"></i>
+				</Button>
+			</div>
 		</div>
 
 		<!-- button for adding a ingredient -->
@@ -93,6 +97,12 @@ function removeIngredient(index){
 .input-container {
 	width: 100%;
 	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.input-left {
+	display: flex;
 	flex-wrap: wrap;
 	gap: 1rem;
 }
@@ -104,7 +114,7 @@ function removeIngredient(index){
 
 .quantity {
 	:deep(.p-inputtext) {
-		width: 24px;
+		max-width: 60px;
 	}
 }
 

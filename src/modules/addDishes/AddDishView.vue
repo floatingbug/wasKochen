@@ -1,5 +1,5 @@
 <script setup>
-import {ref, toRaw} from "vue";
+import {ref, toRaw, watch} from "vue";
 import {useRouter} from "vue-router";
 import Stepper from 'primevue/stepper';
 import StepList from 'primevue/steplist';
@@ -18,11 +18,23 @@ import {foundDishes} from "@/stores/dishStore.js";
 
 
 const router = useRouter();
+const errors = ref([]);
+
+
+//remove errors
+watch([() => dishStore.recipeName, ()  =>  dishStore.description], () => {
+	errors.value = [];
+});
 
 
 async function saveDish(){
 	let dish = toRaw(dishStore);
 	let addedDish = null;
+
+	//check if recipeName and descriptions is filled
+	if(!dish.description) errors.value.push("Eine kurze Beschreibung ist erforderlich.");
+	if(!dish.recipeName) errors.value.push("Ein Name für das Gericht ist erforderlich.");
+	if(errors.value.length > 0) return;
 
 	//store image on server
 	if(dishImage.value){
@@ -146,6 +158,13 @@ async function saveDish(){
 					</StepPanel>
 				</StepItem>
 	 		</Stepper>
+
+			<!-- show errors -->
+			<div v-if="errors.length > 0" class="errors">
+				<div v-for="(error, index) in errors" :key="index">
+					- {{error}}
+				</div>
+			</div>
 			
 			<!-- submit dish -->
 			<Button
@@ -190,6 +209,14 @@ async function saveDish(){
 
 .save-dish-button {
 	margin-top: 2rem;
+}
+
+.errors {
+	display: flex;
+	flex-direction: column;
+	gap: .3rem;
+	color: var(--error-color);
+	margin-top: 1rem;
 }
 
 @media(min-width: 1024px){

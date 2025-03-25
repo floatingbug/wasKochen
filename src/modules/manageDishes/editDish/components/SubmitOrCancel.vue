@@ -40,11 +40,13 @@ function cancel(){
 .content {
 	width: 100%;
 	display: flex;
+	flex-wrap: wrap;
 	gap: 1rem;
 	margin-top: 4rem;
 
 	.p-button {
 		flex: 1;
+		min-width: 150px;
 	}
 }
 </style>

@@ -20,8 +20,6 @@ onMounted(() => {
 <template>    
 	<div class="dish-container">
 		<div v-if="dish" class="dish">
-			<h1>{{dish.dish.recipeName}}</h1>
-
 			<div class="image-container">
 				<img
 					v-if="dish.dish.dishImageUrl.startsWith('/src')"
@@ -29,6 +27,12 @@ onMounted(() => {
 				<img
 					v-else
 					:src="`${API_URL}${dish.dish.dishImageUrl}`" alt="">
+			</div>
+			
+			<h1>{{dish.dish.recipeName}}</h1>
+
+			<div class="description">
+				{{dish.dish.description}}
 			</div>
 
 			<Divider></Divider>
@@ -90,7 +94,7 @@ onMounted(() => {
 }
 
 .ingredients-container {
-	width: 50%;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
