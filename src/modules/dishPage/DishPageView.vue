@@ -5,6 +5,7 @@ import {foundDishes} from "@/stores/dishStore.js";
 
 
 const API_URL = import.meta.env.VITE_API_URL;
+const IMAGE_NAME_STARTS_WITH = import.meta.env.VITE_IMAGE_NAME_STARTS_WITH;
 const route = useRoute();
 const dish = ref(null);
 
@@ -22,7 +23,7 @@ onMounted(() => {
 		<div v-if="dish" class="dish">
 			<div class="image-container">
 				<img
-					v-if="dish.dish.dishImageUrl.startsWith('/src')"
+					v-if="dish.dish.dishImageUrl.startsWith(IMAGE_NAME_STARTS_WITH)"
 					:src="`${dish.dish.dishImageUrl}`" alt="">
 				<img
 					v-else

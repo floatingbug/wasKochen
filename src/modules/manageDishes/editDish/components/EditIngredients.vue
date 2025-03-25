@@ -73,7 +73,7 @@ async function updateIngredientsAPI(){
 	<div class="ingredient"
 		v-for="(ingredient, index) in dish.dish.ingredients" :key="index"
 	>
-		<span class="quantity">
+		<div class="quantity">
 			<InputNumber v-model="ingredient.quantity"></InputNumber>
 			<Select
 				v-model="ingredient.unit"
@@ -81,11 +81,11 @@ async function updateIngredientsAPI(){
 				optionValue="name" 
 				:placeholder="ingredient.unit" 
 			/>
-		</span>
+		</div>
 
-		<span>
+		<div class="ingredient-name">
 			<InputText v-model="ingredient.ingredientName"></InputText>
-		</span>
+		</div>
 	</div>
 
 	<SubmitOrCancel @submitOrCancel:action="handleEvents.submitOrCancel"></SubmitOrCancel>
@@ -96,24 +96,30 @@ async function updateIngredientsAPI(){
 .ingredient {
 	width: 100%;
 	display: flex;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
 
-	span {
-		flex: 1;
-		display: flex;
-		justify-content: center;
-	}
+.quantity {
+	width: 150px;
+	display: flex;
+	gap: 0.5rem;
+	flex-grow: 0;
 
-	.p-inputnumber {
+	:deep(.p-inputtext) {
 		width: 50px;
 	}
-
-	:deep(.p-inputnumber-input) {
-		flex: none;
-		width: 100px;
-	}
-
 	.p-select {
 		width: 100px;
+	}
+}
+
+.ingredient-name {
+	width: 50%;
+
+	.p-inputtext {
+		width: 100%;
 	}
 }
 </style>
