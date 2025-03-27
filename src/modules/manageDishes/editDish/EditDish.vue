@@ -149,7 +149,6 @@ h3 {
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	padding: 4rem;
 	overflow: hidden;
 }
 

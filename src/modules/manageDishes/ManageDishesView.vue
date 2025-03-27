@@ -58,20 +58,32 @@ function editDish(dishId){
 <template>    
 	<EditDish :dish="dish" :isVisible="isVisible" @editDish:action="handleEvents.editDish"></EditDish>
 
+
 	<div class="dishes-container">
 		<div class="dish-content">
-			<DishCard 
-				v-for="(dish, index) in foundDishes" :key="index"
-				:dish="dish"
-				@click="editDish(dish.dishId)"
-			>
-			</DishCard>
+			<h1>Gerichte Verwalten</h1>
+
+			<Divider></Divider>
+
+			<div class="dish-card-container">
+				<DishCard
+					v-for="(dish, index) in foundDishes" :key="index"
+					:dish="dish"
+					@click="editDish(dish.dishId)"
+				>
+				</DishCard>
+			</div>
 		</div>
 	</div>
 </template>   
 
 
 <style scoped>
+h1 {
+	text-align: center;
+	font-size: 2rem;
+}
+
 .dishes-container {
 	width: 100%;
 	display: flex;
@@ -80,12 +92,27 @@ function editDish(dishId){
 
 .dish-content {
 	width: 90%;
-	min-width: 280px;
+	min-width: 300px;
 	max-width: 1024px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 2rem;
+	margin-bottom: 12rem;
+}
+
+.dish-card-container {
+	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	gap: 2rem;
-	margin-top: 5rem;
+	margin-top: 2rem;
+}
+
+@media(min-width: 480px){
+	h1 {
+		font-size: 3rem;
+	}
 }
 </style>

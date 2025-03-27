@@ -11,19 +11,19 @@
 
 			<div class="container-right">
 				<li>
-					<Button as="router-link" to="/">Home</Button>
+					<Button as="router-link" to="/" severity="secondary">Home</Button>
 				</li>
 
 				<li>
-					<Button as="router-link" to="/add-dish">Gericht anlegen</Button>
+					<Button as="router-link" to="/add-dish" severity="secondary">Gericht anlegen</Button>
 				</li>
 				
 				<li>
-					<Button as="router-link" to="/find-dishes">Gerichte finden</Button>
+					<Button as="router-link" to="/find-dishes" severity="secondary">Gerichte finden</Button>
 				</li>
 				
 				<li>
-					<Button as="router-link" to="/manage-dishes">Gerichte verwalten</Button>
+					<Button as="router-link" to="/manage-dishes" severity="secondary">Gerichte verwalten</Button>
 				</li>
 			</div>
 		</ul>
@@ -34,19 +34,22 @@
 <style scoped>
 nav {
 	width: 100%;
-	height: 100px;
+	height: 70px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
 .menu-container {
-	width: 90%;
+	width: 100%;
+	height: 100%;
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	gap: 1rem;
 	padding: 1rem;
 	list-style: none;
+	border-radius: 0;
 	margin: 0;
 }
 

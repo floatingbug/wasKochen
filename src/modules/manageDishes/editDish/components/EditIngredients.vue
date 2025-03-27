@@ -108,7 +108,7 @@ async function updateIngredientsAPI(){
 	flex-grow: 0;
 
 	:deep(.p-inputtext) {
-		width: 50px;
+		width: 60px;
 	}
 	.p-select {
 		width: 100px;

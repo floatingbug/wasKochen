@@ -94,6 +94,10 @@ async function saveDish(){
 <template>    
 	 <div class="add-dish-container">
 	 	<div class="add-dish-content">
+			<h1>Neues Gericht Hinzufügen</h1>
+
+			<Divider></Divider>
+			
 	 		<Stepper value="1">
 				<StepItem value="1">
 					<Step>Rezept</Step>
@@ -179,6 +183,15 @@ async function saveDish(){
 
 
 <style scoped>
+h1 {
+	text-align: center;
+	font-size: 2rem;
+}
+
+.p-stepper {
+	margin-top: 2rem;
+}
+
 .add-dish-container {
 	width: 100%;
 	display: flex;
@@ -187,9 +200,8 @@ async function saveDish(){
 }
 
 .add-dish-content {
-	width: 95%;
-	max-width: 600px;
-	margin-top: 6rem;
+	width: 100%;
+	max-width: 1024px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -217,6 +229,12 @@ async function saveDish(){
 	gap: .3rem;
 	color: var(--error-color);
 	margin-top: 1rem;
+}
+
+@media(min-width: 480px){
+	h1 {
+		font-size: 3rem;
+	}
 }
 
 @media(min-width: 1024px){

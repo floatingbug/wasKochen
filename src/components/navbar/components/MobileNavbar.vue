@@ -12,17 +12,37 @@ function closeNavbar(event){
 
 
 <template>    
-	<nav :class="{'nav-closed': isNavbarClose}">
-		<ul class="navbar-container 
-			card-bg-glass"
-			:class="{'navbar-closed': isNavbarClose}"
+	<nav>
+		<!-- open button -->
+		<Button 
+			v-if="isNavbarClose"
+			variant="text"
+			@click="isNavbarClose = false;"
+		>
+			<i class="pi pi-bars" style="font-size: 2rem;"></i>
+		</Button>
+
+
+		<!-- navbar buttons -->
+		<ul class=" card-bg-glass"
+ 			:class="{'nav-open': !isNavbarClose}"
 			@click="closeNavbar"
 		>
-			<li>
-				<h1>wasKochen Menü</h1>
+			<li class="header">
+				<div class="top">
+					<h1>wasKochen Menü</h1>
+					
+					<!-- close button -->
+					<Button 
+						variant="text"
+						@click="isNavbarClose = true;"
+					>
+						<i class="pi pi-times" style="font-size: 2rem;"></i>
+					</Button>
+				</div>
+				
+				<Divider></Divider>
 			</li>
-
-			<Divider></Divider>
 			
 			<li class="menu-button-container">
 				<Button as="router-link" to="/">
@@ -47,92 +67,69 @@ function closeNavbar(event){
 					Gerichte verwalten
 				</Button>
 			</li>
-
-			<li class="menu-close-button-container">
-				<Button 
-					variant="text"
-					@click="isNavbarClose = true;"
-				>
-					<i class="pi pi-bars" style="font-size: 2rem;"></i>
-				</Button>
-				
-			</li>
 		</ul>
 	</nav>
-
-	<div class="navbar-open-button-container">
-		<Button 
-			v-if="isNavbarClose"
-			variant="text"
-			@click="isNavbarClose = false;"
-		>
-			<i class="pi pi-bars" style="font-size: 2rem;"></i>
-		</Button>
-	</div>
 </template>   
 
 
 <style scoped>
 nav {
-	width: 100%;
-	height: 100dvh;
-	position: fixed;
+	height: 70px;
+	position: relative;
 	display: flex;
-	flex-direction: column;
-	align-items: center;
+	justify-content: center;
 	z-index: 1000;
 }
 
-.navbar-container {
-	width: 80%;
-	max-width: 500px;
-	height: 80%;
+nav ul {
+	width: 90%;
+	position: absolute;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 1rem;
+	gap: 2rem;
 	list-style: none;
-	padding: 1rem;
+	margin: 0;
+	padding: 0;
+	padding-bottom: 2rem;
+	z-index: 1000;
+	transform: translateY(-100%);
 	transition: transform 250ms;
 }
 
-.menu-button-container {
-	width: 100%;
+.nav-open {
+	transform: translateY(0);
+}
 
-	.p-button {
-		width: 100%;
-		text-decoration: none;
+nav ul li {
+	max-width: 400px;
+	width: 90%;
+}
+
+nav ul li a {
+	width: 100%;
+	text-decoration: none;
+}
+
+nav ul .header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	.p-divider {
+		margin-top: 0;
 	}
 }
 
-.menu-close-button-container {
+nav ul .header .top {
 	width: 100%;
 	display: flex;
-	justify-content: flex-end;
-	margin-top: auto;
-}
+	justify-content: space-evenly;
+	align-items: center;
 
-.navbar-open-button-container {
-	width: 100%;
-	position: absolute;
-	display: flex;
-	justify-content: flex-end;
-	padding: 1rem 1rem 0 0;
-}
-
-.navbar-closed {
-	transform: translateY(-110%);
-}
-
-.nav-closed {
-	z-index: -1;
-}
-
-
-@media(min-width: 480px){
-
-	.menu-button-container {
-		height: 50px;
+	h1 {
+		font-size: 2rem;
 	}
 }
 </style>
