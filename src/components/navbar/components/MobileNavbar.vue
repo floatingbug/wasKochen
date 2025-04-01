@@ -56,8 +56,8 @@ function closeNavbar(event){
 			<li v-if="user.isSignedIn" class="main">
 				<ul>
 					<li class="menu-button-container">
-						<Button as="router-link" to="/" severity="secondary" variant="outlined">
-							Home
+						<Button as="router-link" to="/dashboard" severity="secondary" variant="outlined">
+							Start
 						</Button>
 					</li>
 					

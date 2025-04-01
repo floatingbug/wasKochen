@@ -19,7 +19,7 @@ const {user} = useUser();
 			<li v-if="user.isSignedIn">
 				<ul class="container-right">
 					<li>
-						<Button as="router-link" to="/" severity="contrast" variant="text" raised>Home</Button>
+						<Button as="router-link" to="/dashboard" severity="contrast" variant="text" raised>Start</Button>
 					</li>
 					
 					<li>

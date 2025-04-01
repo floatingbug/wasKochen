@@ -2,10 +2,13 @@
 import {reactive} from "vue";
 import {useRouter} from "vue-router";
 import useUser from "@/stores/userStore.js";
+import useGroups from "@/stores/groupsStore.js";
 import createToken from "./api/createToken.js";
+import getGroupsAPI from "@/api/getGroupsAPI.js";
 
 
 const {user} = useUser();
+const {groups} = useGroups();
 const router = useRouter();
 const inputData = reactive({
 	nameOrMail: "",
@@ -24,6 +27,8 @@ async function signIn(){
 	user.isSignedIn = true;
 	localStorage.setItem("isSignedIn", true);
 	localStorage.setItem("token", result.data.token);
+	const fetchedGroups = await getGroupsAPI();
+	groups.value = fetchedGroups.data.groups;
 
 	router.push("/dashboard");
 }
