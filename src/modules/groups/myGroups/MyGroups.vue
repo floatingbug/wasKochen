@@ -4,8 +4,6 @@ import useGroups from "@/stores/groupsStore.js";
 
 const {groups} = useGroups();
 
-console.log(groups.value);
-
 </script>
 
 

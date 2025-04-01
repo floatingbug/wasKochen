@@ -1,18 +1,20 @@
 <script setup>
 import {onMounted} from "vue";
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView, useRouter } from 'vue-router'
 import TheNavbar from "./components/navbar/TheNavbar.vue";
 import device from "./utils/device.js";
 import Toast from 'primevue/toast';
 import useUser from "@/stores/userStore.js";
 import useGroups from "@/stores/groupsStore.js";
+import getGroupsAPI from "@/api/getGroupsAPI.js";
 
 
 const {user} = useUser();
 const {groups} = useGroups();
+const router = useRouter();
 
 
-onMounted(() => {
+onMounted(async () => {
 	//hangle device
 	if(window.innerWidth < 1024) device.value = "mobile";
 	else device.value = "desktop";
@@ -31,10 +33,17 @@ onMounted(() => {
 		user.token = localStorage.getItem("token");
 
 		//get user data from api
-		storeUserData(user);
+		await storeUserData(user);
 
 		//get group data from api
-		storeGroupData({groups, token: user.token});
+		const result = await getGroupsAPI();
+		if(!result.success){
+			console.log(result.errors);
+		}
+
+		groups.value = result.data.groups;
+
+		router.push("/dashboard");
 	}
 });
 
@@ -55,28 +64,6 @@ async function storeUserData(user){
 		}
 
 		user.groupIds = result.data.user.groupIds;
-	}
-	catch(error){
-		console.log(error);
-	}
-}
-
-async function storeGroupData({groups, token}){
-	try{
-		const response = await fetch(`${import.meta.env.VITE_API_URL}/group/get-groups`, {
-			method: "GET",
-			headers: {
-				authorization: token,
-			},
-		});
-
-		const result = await response.json();
-		if(!result.success){
-			console.log(result.errors);
-			return;
-		}
-
-		groups.value = result.data.groups;
 	}
 	catch(error){
 		console.log(error);

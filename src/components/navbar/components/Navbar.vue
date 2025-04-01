@@ -1,20 +1,10 @@
 <script setup>
 import {ref} from "vue";
 import useUser from "@/stores/userStore.js";
-import Menu from "primevue/menu";
-import createUserMenuItems from "./data/createUserMenuItems.js";
-import {useRouter} from "vue-router";
+import UserMenu from "./UserMenu.vue";
 
 
-const router = useRouter();
 const {user} = useUser();
-const menu = ref();
-const userMenuItems = createUserMenuItems(router);
-
-
-function toggle(event){
-	menu.value.toggle(event);
-}
 </script>
 
 
@@ -40,8 +30,7 @@ function toggle(event){
 						<Button as="router-link" to="/groups" severity="contrast" variant="text" raised>Gruppen</Button>
 					</li>
 					<li class="user-menu">
-						<Button type="button" icon="pi pi-user" @click="toggle" aria-haspopup="true" aria-controls="overlay_menu" />
-						<Menu ref="menu" id="overlay_menu" :model="userMenuItems" :popup="true" />
+						<UserMenu></UserMenu>
 					</li>
 				</ul>
 			</li>

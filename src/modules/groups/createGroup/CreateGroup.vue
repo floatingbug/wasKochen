@@ -3,6 +3,7 @@ import {reactive} from "vue";
 import createGroupAPI from "./api/createGroup.js";
 import useUser from "@/stores/userStore.js";
 import { useToast } from 'primevue/usetoast';
+import getGroupsAPI from "@/api/getGroupsAPI.js";
 
 
 const {user} = useUser();
@@ -20,7 +21,7 @@ async function createGroup(){
 		return;
 	}
 
-	user.groupIds.push(result.data.groupId);
+	getGroupsAPI();
 	
 	toast.add({ severity: 'info', summary: 'Gruppe erstellt.', detail: `Die Gruppe ${inputData.name} wurde erstellt.`, life: 3000 });
 

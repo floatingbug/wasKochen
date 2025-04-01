@@ -1,92 +1,41 @@
 <script setup>
-import {ref, onMounted} from "vue";
-import {useRouter} from "vue-router";
-import DishCard from "@/components/DishCard.vue";
+import device from "@/utils/device.js";
 
-
-const router = useRouter();
-const newestDishes = ref([]);
-const randomDishes = ref([]);
-
-
-onMounted(async () => {
-	//get newest dishes
-	try{
-		const response = await fetch(`${import.meta.env.VITE_API_URL}/dish?sort=timestamp-descending&limit=3`, {
-			method: "GET",
-		});
-		const result = await response.json();
-
-		if(!result.success){
-			console.log(result.errors);
-			return;
-		}
-
-		newestDishes.value = result.data.dishes;
-	}
-	catch(error){
-		console.log(error);
-		return;
-	}
-
-	//get random dishes
-	try{
-		const response = await fetch(`${import.meta.env.VITE_API_URL}/dish?random=3`, {
-			method: "GET",
-		});
-		const result = await response.json();
-
-		if(!result.success){
-			console.log(result.errors);
-			return;
-		}
-
-		randomDishes.value = result.data.dishes;
-	}
-	catch(error){
-		console.log(error);
-		return;
-	}
-});
-
-function openDish(id){
-	router.push(`/dish-page?dishId=${id}`);
-}
 </script>
 
 
 <template>    
 	<div class="container">
 		<div class="content">
-			<div class="dishes">
-				<header>
-					<h1>Die neusten Gerichte</h1>
-				</header>
-
-				<main>
-					<DishCard
-						v-for="(dish, index) in newestDishes" :key="index"
-						:dish="dish"
-						@click="openDish(dish.dishId)"
-					>
-					</DishCard>
-				</main>
-			</div>
+			<main>
+				<h1>Hallo und willkommen auf wasKochen</h1>
 				
-			<div class="dishes">
-				<header>
-					<h1>Zufällige Gerichte</h1>
-				</header>
+				<p>
+					Die Frage, „Was kochen?“ stellt sich täglich in sehr vielen Haushalten. Viele habe Zettel am
+					Kühlschrank hängen mit den 10 Lieblingsrichten, andere haben in Kochbüchern Seiten markiert.
+					Wir schaffen da Abhilfe und wollen das Problem lösen!
+				</p>
+				<p>
+					"WasKochen" ist eine Web-Applikation zur Verwaltung von Gerichten und zur Unterstützung bei
+					der Essensplanung. 
+				</p>
+			</main>
 
-				<main>
-					<DishCard
-						v-for="(dish, index) in randomDishes" :key="index"
-						:dish="dish"
-						@click="openDish(dish.dishId)"
-					>
-					</DishCard>
-				</main>
-			</div>
+			<Divider :layout="device === 'mobile' ? 'horizontal' : 'vertical'"></Divider>
+
+			<footer>
+				<p>
+					Um die App nutzen zu können, ist eine Anmeldung erforderlich.
+					<Button as="router-link" to="/auth/sign-in" variant="link">Anmelden</Button>
+				</p>
+
+				<div class="bottom">
+					<p>
+						Du hast noch kein Konto auf dem du dich anmelden kannst? 
+						<Button as="router-link" to="/auth/sign-up" variant="link">Konto erstellen</Button>
+					</p>
+				</div>
+			</footer>
 		</div>
 	</div>
 </template>   
@@ -97,49 +46,58 @@ function openDish(id){
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	align-items: center;
 }
 
 .content {
-	width: 80%;
-	min-width: 300px;
-	max-width: 1700px;
+	width: 90%;
+	text-align: center;
+}
+
+footer {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-}
-
-.dishes {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.dishes header {
-	width: 100%;
-	padding: 1rem;
-	border-radius: 8px;
-	border: 1px solid var(--border-color);
 	margin-top: 2rem;
-	background-color: var(--background-surface);
 }
 
-.dishes header h1 {
-	color: var(--p-primary-color);
+footer .bottom {
+	width: 80%;
+	margin-top: 2rem;
+}
+
+footer .bottom p {
+	display: inline;
+}
+
+footer p{
+	width: 80%;
+	display: inline;
 	margin: 0;
 }
 
-.dishes main {
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
-	gap: 2rem;
-	padding: 2rem;
-	border-radius: 8px;
-	border: 1px solid var(--border-color);
-	margin-top: 2rem;
-	background-color: var(--background-surface);
+@media(min-width: 768px){
+	.container {
+		margin-top: 5rem;
+	}
+}
+
+@media(min-width: 1024px){
+	.container {
+		margin-top: 12rem;
+	}
+
+	.content {
+		display: flex;
+		align-items: center;
+		text-align: start;
+	}
+
+	main, footer {
+		flex: 1;
+	}
+
+	footer {
+		margin: 0;
+	}
 }
 </style>

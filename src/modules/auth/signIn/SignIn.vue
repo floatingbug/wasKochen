@@ -25,7 +25,7 @@ async function signIn(){
 	localStorage.setItem("isSignedIn", true);
 	localStorage.setItem("token", result.data.token);
 
-	router.push("/");
+	router.push("/dashboard");
 }
 
 </script>

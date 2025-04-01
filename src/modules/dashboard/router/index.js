@@ -3,7 +3,7 @@ import DashboardView from "../DashboardView.vue";
 
 export default [
 	{
-		path: "/",
+		path: "/dashboard",
 		component: DashboardView,
 	}
 ];

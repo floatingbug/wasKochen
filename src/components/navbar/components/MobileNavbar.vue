@@ -1,17 +1,10 @@
 <script setup>
 import {ref} from "vue";
 import useUser from "@/stores/userStore.js";
-import Menu from "primevue/menu";
-import createUserMenuItems from "./data/createUserMenuItems.js";
-import {useRouter} from "vue-router";
+import UserMenu from "./UserMenu.vue";
 
 
-const router = useRouter();
 const {user} = useUser();
-const userMenuItems = createUserMenuItems(router);
-const menu = ref();
-
-
 const isNavbarClose = ref(true);
 
 
@@ -19,10 +12,6 @@ function closeNavbar(event){
 	if(event.target.dataset.pcName === "button") isNavbarClose.value = true;
 }
 
-
-function toggle(event){
-	menu.value.toggle(event);
-}
 </script>
 
 
@@ -85,8 +74,7 @@ function toggle(event){
 					</li>
 					
 					<li class="user-menu" @click.stop>
-						<Button type="button" icon="pi pi-user" @click="toggle" aria-haspopup="true" aria-controls="overlay_menu" />
-						<Menu ref="menu" id="overlay_menu" :model="userMenuItems" :popup="true" />
+						<UserMenu></UserMenu>
 					</li>
 				</ul>
 			</li>
