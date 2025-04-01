@@ -98,8 +98,6 @@ function openDish(dishId){
 		<div class="content-right">
 			<div class="find-dishes-container">
 				<header>
-					<h1 class="page-header">Gerichte finden</h1>
-					
 					<InputGroup>
 						<InputGroupAddon>
 							<i class="pi pi-search"></i>

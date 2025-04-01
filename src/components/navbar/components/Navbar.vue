@@ -1,31 +1,63 @@
 <script setup>
+import {ref} from "vue";
+import useUser from "@/stores/userStore.js";
+import Menu from "primevue/menu";
+import createUserMenuItems from "./data/createUserMenuItems.js";
+import {useRouter} from "vue-router";
+
+
+const router = useRouter();
+const {user} = useUser();
+const menu = ref();
+const userMenuItems = createUserMenuItems(router);
+
+
+function toggle(event){
+	menu.value.toggle(event);
+}
 </script>
 
 
 <template>    
 	<nav>
-		<ul class="menu-container card-bg-glass">
-			<div class="container-left">
+		<ul class="menu-container">
+			<li class="container-left">
 				<span>wasKochen</span>
-			</div>
+			</li>
 
-			<div class="container-right">
-				<li>
-					<Button as="router-link" to="/" severity="secondary">Home</Button>
-				</li>
+			<!-- buttons for signed in users -->
+			<li v-if="user.isSignedIn">
+				<ul class="container-right">
+					<li>
+						<Button as="router-link" to="/" severity="contrast" variant="text" raised>Home</Button>
+					</li>
+					
+					<li>
+						<Button as="router-link" to="/dish" severity="contrast" variant="text" raised>Gerichte</Button>
+					</li>
+					
+					<li>
+						<Button as="router-link" to="/groups" severity="contrast" variant="text" raised>Gruppen</Button>
+					</li>
+					<li class="user-menu">
+						<Button type="button" icon="pi pi-user" @click="toggle" aria-haspopup="true" aria-controls="overlay_menu" />
+						<Menu ref="menu" id="overlay_menu" :model="userMenuItems" :popup="true" />
+					</li>
+				</ul>
+			</li>
 
-				<li>
-					<Button as="router-link" to="/add-dish" severity="secondary">Gericht anlegen</Button>
-				</li>
-				
-				<li>
-					<Button as="router-link" to="/find-dishes" severity="secondary">Gerichte finden</Button>
-				</li>
-				
-				<li>
-					<Button as="router-link" to="/manage-dishes" severity="secondary">Gerichte verwalten</Button>
-				</li>
-			</div>
+			<!-- buttons for signed out  users -->
+			<li v-else>
+				<div class="container-right">
+					<Button as="router-link" to="/auth/sign-in">
+						Anmelden
+					</Button>
+
+					<Button as="router-link" to="/auth/sign-up">
+						Registrieren
+					</Button>
+				</div>
+			</li>
 		</ul>
 	</nav>
 </template>   
@@ -41,6 +73,14 @@ nav {
 }
 
 .menu-container {
+	background-color: var(--navbar-bg);
+}
+
+ul {
+	list-style: none;
+}
+
+.menu-container {
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -48,7 +88,6 @@ nav {
 	align-items: center;
 	gap: 1rem;
 	padding: 1rem;
-	list-style: none;
 	border-radius: 0;
 	margin: 0;
 }
@@ -60,11 +99,17 @@ nav {
 	li {
 		min-width: 150px;
 
-		.p-button {
-			width: 100%;
-			text-decoration: none;
-		}
 	}
+	
+	.p-button {
+		width: 100%;
+		text-decoration: none;
+	}
+}
+
+.container-right .user-menu {
+	width: 50px;
+	min-width: 0;
 }
 
 .container-left {

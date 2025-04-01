@@ -19,6 +19,7 @@ import Textarea from 'primevue/textarea';
 import Badge from "primevue/badge";
 import ToastService from 'primevue/toastservice';
 import Tooltip from 'primevue/tooltip';
+import Ripple from 'primevue/ripple';
 
 
 const app = createApp(App)
@@ -28,6 +29,7 @@ const MyPreset = definePreset(Aura, {
 });
 
 app.use(PrimeVue, {
+	ripple: true,
     theme: {
         preset:	MyPreset 
     }
@@ -37,6 +39,8 @@ app.use(router)
 app.use(ToastService);
 
 app.directive('tooltip', Tooltip);
+app.directive('ripple', Ripple);
+
 
 app.component("Button", Button);
 app.component("Divider", Divider);

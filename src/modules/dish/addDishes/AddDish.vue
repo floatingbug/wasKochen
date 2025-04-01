@@ -94,10 +94,6 @@ async function saveDish(){
 <template>    
 	 <div class="add-dish-container">
 	 	<div class="add-dish-content">
-			<h1>Neues Gericht Hinzufügen</h1>
-
-			<Divider></Divider>
-			
 	 		<Stepper value="1">
 				<StepItem value="1">
 					<Step>Rezept</Step>

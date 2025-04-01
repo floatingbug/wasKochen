@@ -61,10 +61,6 @@ function editDish(dishId){
 
 	<div class="dishes-container">
 		<div class="dish-content">
-			<h1>Gerichte Verwalten</h1>
-
-			<Divider></Divider>
-
 			<div class="dish-card-container">
 				<DishCard
 					v-for="(dish, index) in foundDishes" :key="index"

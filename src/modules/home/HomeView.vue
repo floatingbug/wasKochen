@@ -1,8 +1,10 @@
 <script setup>
 import {ref, onMounted} from "vue";
+import {useRouter} from "vue-router";
 import DishCard from "@/components/DishCard.vue";
 
 
+const router = useRouter();
 const newestDishes = ref([]);
 const randomDishes = ref([]);
 
@@ -46,6 +48,10 @@ onMounted(async () => {
 		return;
 	}
 });
+
+function openDish(id){
+	router.push(`/dish-page?dishId=${id}`);
+}
 </script>
 
 
@@ -61,6 +67,7 @@ onMounted(async () => {
 					<DishCard
 						v-for="(dish, index) in newestDishes" :key="index"
 						:dish="dish"
+						@click="openDish(dish.dishId)"
 					>
 					</DishCard>
 				</main>
@@ -75,6 +82,7 @@ onMounted(async () => {
 					<DishCard
 						v-for="(dish, index) in randomDishes" :key="index"
 						:dish="dish"
+						@click="openDish(dish.dishId)"
 					>
 					</DishCard>
 				</main>
