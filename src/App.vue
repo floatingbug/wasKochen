@@ -5,22 +5,20 @@ import TheNavbar from "./components/navbar/TheNavbar.vue";
 import device from "./utils/device.js";
 import Toast from 'primevue/toast';
 import useUser from "@/stores/userStore.js";
-import useGroups from "@/stores/groupsStore.js";
-import getGroupsAPI from "@/api/getGroupsAPI.js";
+import getWeekPlanAPI from "@/api/getWeekPlanAPI.js";
 
 
 const {user} = useUser();
-const {groups} = useGroups();
 const router = useRouter();
 
 
 onMounted(async () => {
 	//hangle device
-	if(window.innerWidth < 1024) device.value = "mobile";
+	if(window.innerWidth < 1150) device.value = "mobile";
 	else device.value = "desktop";
 
 	window.addEventListener("resize", (event)=> {
-		if(event.target.window.innerWidth < 1024) device.value = "mobile";
+		if(event.target.window.innerWidth < 1150) device.value = "mobile";
 		else device.value = "desktop";
 	});
 
@@ -34,14 +32,6 @@ onMounted(async () => {
 
 		//get user data from api
 		await storeUserData(user);
-
-		//get group data from api
-		const result = await getGroupsAPI();
-		if(!result.success){
-			console.log(result.errors);
-		}
-
-		groups.value = result.data.groups;
 
 		router.push("/dashboard");
 	}

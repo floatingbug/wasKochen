@@ -31,6 +31,9 @@ const IMAGE_NAME_STARTS_WITH = import.meta.env.VITE_IMAGE_NAME_STARTS_WITH;
 			<div class="description">
 				{{dish.dish.description}}
 			</div>
+
+			<slot name="buttons">
+			</slot>
 			
 			<div class="categories-container">
 				<Badge
@@ -90,7 +93,6 @@ const IMAGE_NAME_STARTS_WITH = import.meta.env.VITE_IMAGE_NAME_STARTS_WITH;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	cursor: pointer;
 	overflow: hidden;
 
 	h3 {

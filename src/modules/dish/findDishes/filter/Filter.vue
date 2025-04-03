@@ -95,8 +95,6 @@ async function getDishes(filterQueryObject){
 		query += `portions=${filterQueryObject.portionsNumber}&`;
 	}
 
-	console.log(query);
-
 	//get dishes
 	try{
 		const response = await fetch(`${import.meta.env.VITE_API_URL}/dish${query}`, {

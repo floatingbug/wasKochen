@@ -1,6 +1,6 @@
 <script setup>
 import {ref, onMounted, watch} from "vue";
-import {useRouter} from "vue-router";
+import {useRouter, useRoute} from "vue-router";
 import Filter from "./filter/Filter.vue";
 import {foundDishes} from "@/stores/dishStore.js";
 import DishCard from "@/components/DishCard.vue";
@@ -9,8 +9,10 @@ import device from "@/utils/device.js";
 
 const API_URL = ref(import.meta.env.VITE_API_URL);
 const router = useRouter();
+const route = useRoute();
 const recipeName = ref("");
 const isFilterOpen = ref(false);
+const mealId = ref("");
 
 
 onMounted(async () => {
@@ -31,6 +33,8 @@ onMounted(async () => {
 		console.log(error);
 		return;
 	}
+
+	if(route.query.mealId) mealId.value = route.query.mealId;
 });
 
 //get dishes by recipeName
@@ -61,6 +65,9 @@ function openDish(dishId){
 	router.push(`/dish-page?dishId=${dishId}`);
 }
 
+function addMealToPlan(dishId){
+	router.push(`/meal-plan?dishId=${dishId}&mealId=${mealId.value}`);
+}
 </script>
 
 
@@ -120,8 +127,13 @@ function openDish(dishId){
 					<DishCard 
 						v-for="(dish, index) in foundDishes" :key="index" 
 						:dish="dish"
-						@click="openDish(dish.dishId)"
-					/>
+					>
+						<template v-if="mealId" #buttons>
+							<Button @click="addMealToPlan(dish.dishId)">
+								hinzufügen
+							</Button>
+						</template>
+					</DishCard>
 				</div>
 			</div>
 		</div>
@@ -189,7 +201,7 @@ function openDish(dishId){
 	margin-top: 2rem;
 }
 
-.content-left .p-button{
+.content-left .p-button {
 	position: absolute;
 	top: 1rem;
 	right: 1rem;

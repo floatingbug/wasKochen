@@ -62,14 +62,26 @@ function closeNavbar(event){
 					</li>
 					
 					<li class="menu-button-container">
-						<Button as="router-link" to="/dish" severity="secondary" variant="outlined">
-							Gerichte
+						<Button as="router-link" to="/meal-plan" severity="secondary" variant="outlined">
+							Wochenplaner
 						</Button>
 					</li>
 					
 					<li class="menu-button-container">
-						<Button as="router-link" to="/groups" severity="secondary" variant="outlined">
-							Gruppen
+						<Button as="router-link" to="/dish/find-dishes" severity="secondary" variant="outlined">
+							Gerichte Finden
+						</Button>
+					</li>
+					
+					<li class="menu-button-container">
+						<Button as="router-link" to="/dish/manage-dishes" severity="secondary" variant="outlined">
+							Gerichte Verwalten
+						</Button>
+					</li>
+					
+					<li class="menu-button-container">
+						<Button as="router-link" to="/dish/add-dish" severity="secondary" variant="outlined">
+							Gericht Hinzufügen
 						</Button>
 					</li>
 					

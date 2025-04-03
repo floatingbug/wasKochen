@@ -103,7 +103,7 @@ function openDish(id){
 .content {
 	width: 80%;
 	min-width: 300px;
-	max-width: 1700px;
+	max-width: 1024px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -138,8 +138,6 @@ function openDish(id){
 	gap: 2rem;
 	padding: 2rem;
 	border-radius: 8px;
-	border: 1px solid var(--border-color);
 	margin-top: 2rem;
-	background-color: var(--background-surface);
 }
 </style>

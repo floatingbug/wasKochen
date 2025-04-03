@@ -4,7 +4,6 @@ import {reactive} from "vue";
 const user = reactive({
 	isSignedIn: false,
 	token: "",
-	groupIds: [],
 });
 
 

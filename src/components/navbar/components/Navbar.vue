@@ -23,12 +23,21 @@ const {user} = useUser();
 					</li>
 					
 					<li>
-						<Button as="router-link" to="/dish" severity="contrast" variant="text" raised>Gerichte</Button>
+						<Button as="router-link" to="/meal-plan" severity="contrast" variant="text" raised>Wochenplaner</Button>
 					</li>
 					
 					<li>
-						<Button as="router-link" to="/groups" severity="contrast" variant="text" raised>Gruppen</Button>
+						<Button as="router-link" to="/dish/find-dishes" severity="contrast" variant="text" raised>Gerichte Finden</Button>
 					</li>
+					
+					<li>
+						<Button as="router-link" to="/dish/manage-dishes" severity="contrast" variant="text" raised>Gerichte Verwalten</Button>
+					</li>
+
+					<li>
+						<Button as="router-link" to="/dish/add-dish" severity="contrast" variant="text" raised>Gericht Hinzufügen</Button>
+					</li>
+
 					<li class="user-menu">
 						<UserMenu></UserMenu>
 					</li>
