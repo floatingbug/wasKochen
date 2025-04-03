@@ -2,6 +2,7 @@
 import {ref, onMounted} from "vue";
 import {useRoute} from "vue-router";
 import {foundDishes} from "@/stores/dishStore.js";
+import getDishAPI from "@/api/getDishAPI.js";
 
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -10,9 +11,10 @@ const route = useRoute();
 const dish = ref(null);
 
 
-onMounted(() => {
+onMounted(async () => {
 	const dishId = route.query.dishId;
-	dish.value = foundDishes.value.find(dish => dish.dishId === dishId);
+	const result = await getDishAPI({dishId});
+	dish.value = result.data.dish;
 });
 
 </script>
@@ -23,17 +25,17 @@ onMounted(() => {
 		<div v-if="dish" class="dish">
 			<div class="image-container">
 				<img
-					v-if="dish.dish.dishImageUrl.startsWith(IMAGE_NAME_STARTS_WITH)"
-					:src="`${dish.dish.dishImageUrl}`" alt="">
+					v-if="dish.dishImageUrl.startsWith(IMAGE_NAME_STARTS_WITH)"
+					:src="`${dish.dishImageUrl}`" alt="">
 				<img
 					v-else
-					:src="`${API_URL}${dish.dish.dishImageUrl}`" alt="">
+					:src="`${API_URL}${dish.dishImageUrl}`" alt="">
 			</div>
 			
-			<h1>{{dish.dish.recipeName}}</h1>
+			<h1>{{dish.recipeName}}</h1>
 
 			<div class="description">
-				{{dish.dish.description}}
+				{{dish.description}}
 			</div>
 
 			<Divider></Divider>
@@ -41,7 +43,7 @@ onMounted(() => {
 			<h3>Zutaten</h3>
 			<div class="ingredients-container">
 				<div class="ingredient"
-					v-for="(ingredient, index) in dish.dish.ingredients" :key="index"
+					v-for="(ingredient, index) in dish.ingredients" :key="index"
 				>
 					<div class="quantity-and-unit">
 						<span>Menge: &nbsp</span>
@@ -59,7 +61,7 @@ onMounted(() => {
 
 			<h3>Zubereitung</h3>
 			<div class="preparation">
-				{{dish.dish.preparation}}
+				{{dish.preparation}}
 			</div>
 
 			<Divider></Divider>
@@ -67,7 +69,7 @@ onMounted(() => {
 			<h3>Kategorien</h3>
 			<div class="categories-container">
 				<Badge
-					v-for="(categorie, index) in dish.dish.categories" :key="index"
+					v-for="(categorie, index) in dish.categories" :key="index"
 				>
 					{{categorie}}
 				</Badge>

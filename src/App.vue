@@ -30,35 +30,9 @@ onMounted(async () => {
 		user.isSignedIn = true;
 		user.token = localStorage.getItem("token");
 
-		//get user data from api
-		await storeUserData(user);
-
 		router.push("/dashboard");
 	}
 });
-
-
-async function storeUserData(user){
-	try{
-		const response = await fetch(`${import.meta.env.VITE_API_URL}/user`, {
-			method: "GET",
-			headers: {
-				authorization: user.token,
-			},
-		});
-
-		const result = await response.json();
-		if(!result.success){
-			console.log(result.errors);
-			return;
-		}
-
-		user.groupIds = result.data.user.groupIds;
-	}
-	catch(error){
-		console.log(error);
-	}
-}
 
 </script>
 
