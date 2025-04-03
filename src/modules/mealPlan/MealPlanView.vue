@@ -1,5 +1,5 @@
 <script setup>
-import {onMounted} from "vue";
+import {ref, onMounted} from "vue";
 import {weekPlan, setWeekPlan} from "@/stores/weekPlanStore.js";
 import useUser from "@/stores/userStore.js";
 import getWeekPlanAPI from "@/api/getWeekPlanAPI.js";
@@ -7,6 +7,7 @@ import WeekPlan from "./weekPlan/WeekPlan.vue";
 
 
 const {user} = useUser();
+const isInitialized = ref(false);
 
 
 onMounted(async () => {
@@ -14,9 +15,9 @@ onMounted(async () => {
 
 	if(!weekPlan){
 		setWeekPlan(fetchedMealPlan.data.weekPlan);
-
-		console.log(weekPlan);
 	}
+
+	isInitialized.value = true;
 });
 
 </script>
@@ -25,7 +26,7 @@ onMounted(async () => {
 <template>    
 	<div class="container">
 		<div class="content">
-			<WeekPlan></WeekPlan>
+			<WeekPlan v-if="isInitialized"></WeekPlan>
 		</div>
 	</div>
 </template>   
