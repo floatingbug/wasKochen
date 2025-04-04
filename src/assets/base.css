@@ -1,12 +1,23 @@
 :root {
-	--card-bg: var(--p-surface-900);
-	--border-color: rgb(from var(--p-orange-200) r g b / 10%);
+	--text-color: var(--p-surface-500);
+	--card-bg: var(--p-surface-100);
+	--border-color: rgb(from var(--p-orange-900) r g b / 30%);
 	--selected-color: rgb(from var(--p-orange-300) r g b / 100%);
 	--error-color: var(--p-red-400);
 	--header-bg: rgb(from var(--p-surface-800) r g b / 50%);
-	--background-surface: rgb(from var(--p-surface-800) r g b / 50%);
-	--navbar-bg: rgb(from var(--p-surface-800) r g b / 100%);
-	--th-bg: rgb(from var(--p-surface-700) r g b / 50%);
-	--tr-bg: rgb(from var(--p-surface-700) r g b / 10%);
-	--caption-bg: rgb(from var(--p-surface-900) r g b / 100%);
+	--background-surface: rgb(from var(--p-surface-200) r g b / 100%);
+	--navbar-bg: rgb(from var(--p-surface-200) r g b / 100%);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+		--text-color: var(--p-surface-100);
+        --card-bg: var(--p-surface-900);
+        --border-color: rgb(from var(--p-orange-200) r g b / 10%);
+        --selected-color: rgb(from var(--p-orange-300) r g b / 100%);
+        --error-color: var(--p-red-400);
+        --header-bg: rgb(from var(--p-surface-800) r g b / 50%);
+        --background-surface: rgb(from var(--p-surface-800) r g b / 50%);
+        --navbar-bg: rgb(from var(--p-surface-800) r g b / 100%);
+    }
 }

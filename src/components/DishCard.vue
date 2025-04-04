@@ -94,6 +94,7 @@ const IMAGE_NAME_STARTS_WITH = import.meta.env.VITE_IMAGE_NAME_STARTS_WITH;
 	flex-direction: column;
 	align-items: center;
 	overflow: hidden;
+	border-color: var(--border-color);
 
 	h3 {
 		text-align: center;

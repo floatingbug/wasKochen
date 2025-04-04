@@ -19,23 +19,23 @@ const {user} = useUser();
 			<li v-if="user.isSignedIn">
 				<ul class="container-right">
 					<li>
-						<Button as="router-link" to="/dashboard" severity="contrast" variant="text" raised>Start</Button>
+						<Button as="router-link" to="/dashboard" variant="text" raised>Start</Button>
 					</li>
 					
 					<li>
-						<Button as="router-link" to="/meal-plan" severity="contrast" variant="text" raised>Wochenplaner</Button>
+						<Button as="router-link" to="/meal-plan" variant="text" raised>Wochenplaner</Button>
 					</li>
 					
 					<li>
-						<Button as="router-link" to="/dish/find-dishes" severity="contrast" variant="text" raised>Gerichte Finden</Button>
+						<Button as="router-link" to="/dish/find-dishes" variant="text" raised>Gerichte Finden</Button>
 					</li>
 					
 					<li>
-						<Button as="router-link" to="/dish/manage-dishes" severity="contrast" variant="text" raised>Gerichte Verwalten</Button>
+						<Button as="router-link" to="/dish/manage-dishes" variant="text" raised>Gerichte Verwalten</Button>
 					</li>
 
 					<li>
-						<Button as="router-link" to="/dish/add-dish" severity="contrast" variant="text" raised>Gericht Hinzufügen</Button>
+						<Button as="router-link" to="/dish/add-dish" variant="text" raised>Gericht Hinzufügen</Button>
 					</li>
 
 					<li class="user-menu">
@@ -68,6 +68,7 @@ nav {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	border-bottom: 1px solid var(--border-color);
 }
 
 .menu-container {

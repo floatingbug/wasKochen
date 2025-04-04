@@ -117,7 +117,7 @@ function openDish(id){
 }
 
 .dishes header {
-	width: 100%;
+	width: 90%;
 	padding: 1rem;
 	border-radius: 8px;
 	border: 1px solid var(--border-color);
