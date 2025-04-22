@@ -30,6 +30,7 @@ watch([() => dishStore.recipeName, ()  =>  dishStore.description], () => {
 async function saveDish(){
 	let dish = toRaw(dishStore);
 	let addedDish = null;
+	const token = localStorage.getItem("token");
 
 	//check if recipeName and descriptions is filled
 	if(!dish.description) errors.value.push("Eine kurze Beschreibung ist erforderlich.");
@@ -44,6 +45,7 @@ async function saveDish(){
 		try{
 			const response = await fetch(`${import.meta.env.VITE_API_URL}/file`, {
 				method: "POST",
+				authorization: token,
 				body: formData,
 			});
 
@@ -67,6 +69,7 @@ async function saveDish(){
 			method: "POST",
 			headers: {
 				"content-type": "application/json",
+				authorization: token,
 			},
 			body: JSON.stringify({newDish: dish}),
 		});
@@ -184,20 +187,16 @@ h1 {
 	font-size: 2rem;
 }
 
-.p-stepper {
-	margin-top: 2rem;
-}
-
 .add-dish-container {
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	padding-bottom: 300px;
+	margin-bottom: 12rem;
 }
 
 .add-dish-content {
-	width: 100%;
-	max-width: 1024px;
+	width: 90%;
+	max-width: 600px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -236,6 +235,10 @@ h1 {
 @media(min-width: 1024px){
 	.add-dish-content {
 		margin-top: 2rem;
+	}
+
+	h1 {
+		font-size: 4rem;
 	}
 }
 </style>

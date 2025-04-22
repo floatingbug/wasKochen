@@ -20,12 +20,16 @@ function closeNavbar(event){
 		<!-- open button -->
 		<Button 
 			v-if="isNavbarClose"
+			class="open-navbar-button"
 			variant="text"
 			@click="isNavbarClose = false;"
 		>
-			<i class="pi pi-bars" style="font-size: 2rem;"></i>
+			<i class="pi pi-bars" style="font-size: 2rem; color: var(--text-color)"></i>
 		</Button>
 
+		<span v-if="isNavbarClose" class="logo">
+			wasKochen
+		</span>
 
 		<!-- navbar buttons -->
 		<ul class=" card-bg-glass nav-content"
@@ -56,31 +60,31 @@ function closeNavbar(event){
 			<li v-if="user.isSignedIn" class="main">
 				<ul>
 					<li class="menu-button-container">
-						<Button as="router-link" to="/dashboard" severity="secondary" variant="outlined">
+						<Button as="router-link" to="/dashboard" severity="contrast" variant="outlined">
 							Start
 						</Button>
 					</li>
 					
 					<li class="menu-button-container">
-						<Button as="router-link" to="/meal-plan" severity="secondary" variant="outlined">
+						<Button as="router-link" to="/meal-plan" severity="contrast" variant="outlined">
 							Wochenplaner
 						</Button>
 					</li>
 					
 					<li class="menu-button-container">
-						<Button as="router-link" to="/dish/find-dishes" severity="secondary" variant="outlined">
+						<Button as="router-link" to="/dish/find-dishes" severity="contrast" variant="outlined">
 							Gerichte Finden
 						</Button>
 					</li>
 					
 					<li class="menu-button-container">
-						<Button as="router-link" to="/dish/manage-dishes" severity="secondary" variant="outlined">
+						<Button as="router-link" to="/dish/manage-dishes" severity="contrast" variant="outlined">
 							Gerichte Verwalten
 						</Button>
 					</li>
 					
 					<li class="menu-button-container">
-						<Button as="router-link" to="/dish/add-dish" severity="secondary" variant="outlined">
+						<Button as="router-link" to="/dish/add-dish" severity="contrast" variant="outlined">
 							Gericht Hinzufügen
 						</Button>
 					</li>
@@ -134,8 +138,16 @@ nav {
 	height: 70px;
 	position: relative;
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid var(--border-color);
 	z-index: 1000;
+}
+
+.logo {
+	font-size: 1.4rem;
+	color: var(--p-primary-color);
+	padding-right: 1rem;
 }
 
 .nav-content {
@@ -150,7 +162,7 @@ nav {
 }
 
 .nav-open {
-	transform: translateY(0);
+	transform: translateY(42%);
 }
 
 .nav-content .header {
@@ -159,6 +171,7 @@ nav {
 
 .nav-content .header h1 {
 	margin-left: 1rem;
+	color: var(--p-primary-color);
 }
 
 .nav-content .header ul {
@@ -191,5 +204,4 @@ nav {
 	width: 50px;
 	margin-left: auto;
 }
-
 </style>

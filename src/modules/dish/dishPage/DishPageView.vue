@@ -21,58 +21,72 @@ onMounted(async () => {
 
 
 <template>    
-	<div class="dish-container">
-		<div v-if="dish" class="dish">
-			<div class="image-container">
-				<img
-					v-if="dish.dishImageUrl.startsWith(IMAGE_NAME_STARTS_WITH)"
-					:src="`${dish.dishImageUrl}`" alt="">
-				<img
-					v-else
-					:src="`${API_URL}${dish.dishImageUrl}`" alt="">
+	<div class="layout">
+		<div class="layout-header">
+		</div>
+
+		<div class="layout-body">
+			<div class="layout-sidebar-left">
+				
 			</div>
 			
-			<h1>{{dish.recipeName}}</h1>
-
-			<div class="description">
-				{{dish.description}}
-			</div>
-
-			<Divider></Divider>
-
-			<h3>Zutaten</h3>
-			<div class="ingredients-container">
-				<div class="ingredient"
-					v-for="(ingredient, index) in dish.ingredients" :key="index"
-				>
-					<div class="quantity-and-unit">
-						<span>Menge: &nbsp</span>
-						{{ingredient.quantity}}{{ingredient.unit}}
+			<div class="layout-content">
+				<div v-if="dish" class="dish">
+					<div class="image-container">
+						<img
+							v-if="dish.dishImageUrl.startsWith(IMAGE_NAME_STARTS_WITH)"
+							:src="`${dish.dishImageUrl}`" alt="">
+						<img
+							v-else
+							:src="`${API_URL}${dish.dishImageUrl}`" alt="">
 					</div>
-
-					<div class="ingredient-name">
-						<span>Zutat: &nbsp</span>
-						{{ingredient.ingredientName}}
+					
+					<h1>{{dish.recipeName}}</h1>
+			
+					<div class="description">
+						{{dish.description}}
+					</div>
+			
+					<Divider></Divider>
+			
+					<h3>Zutaten</h3>
+					<div class="ingredients-container">
+						<div class="ingredient"
+							v-for="(ingredient, index) in dish.ingredients" :key="index"
+						>
+							<div class="quantity-and-unit">
+								<span>Menge: &nbsp</span>
+								{{ingredient.quantity}}{{ingredient.unit}}
+							</div>
+			
+							<div class="ingredient-name">
+								<span>Zutat: &nbsp</span>
+								{{ingredient.ingredientName}}
+							</div>
+						</div>
+					</div>
+			
+					<Divider></Divider>
+			
+					<h3>Zubereitung</h3>
+					<div class="preparation">
+						{{dish.preparation}}
+					</div>
+			
+					<Divider></Divider>
+			
+					<h3>Kategorien</h3>
+					<div class="categories-container">
+						<Badge
+							v-for="(categorie, index) in dish.categories" :key="index"
+						>
+							{{categorie}}
+						</Badge>
 					</div>
 				</div>
 			</div>
 
-			<Divider></Divider>
-
-			<h3>Zubereitung</h3>
-			<div class="preparation">
-				{{dish.preparation}}
-			</div>
-
-			<Divider></Divider>
-
-			<h3>Kategorien</h3>
-			<div class="categories-container">
-				<Badge
-					v-for="(categorie, index) in dish.categories" :key="index"
-				>
-					{{categorie}}
-				</Badge>
+			<div class="layout-sidebar-right">
 			</div>
 		</div>
 	</div>
@@ -80,58 +94,58 @@ onMounted(async () => {
 
 
 <style scoped>
-.dish-container {
+.layout-content {
 	width: 100%;
 	display: flex;
 	justify-content: center;
 	margin-bottom: 12rem;
-}
-
-.dish {
-	width: 90%;
-	max-width: 400px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	margin-top: 4rem;
-}
-
-.ingredients-container {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-}
-
-.ingredient {
-	display: flex;
-	gap: 2rem;
-
-	div {
-		flex: 1;
+	
+	.dish {
+		width: 90%;
+		max-width: 400px;
 		display: flex;
-		justify-content: center;
+		flex-direction: column;
+		align-items: center;
+		margin-top: 4rem;
 	}
-}
 
-.categories-container {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 1rem;
-}
+	.ingredients-container {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
 
-h1 {
-	text-align: center;
-	margin-bottom: 2rem;
-}
+	.ingredient {
+		display: flex;
+		gap: 2rem;
 
-.image-container {
-	width: 90%;
-	min-width: 280px;
-	max-width: 400px;
-}
+		div {
+			flex: 1;
+			display: flex;
+			justify-content: center;
+		}
+	}
 
-img {
-	width: 100%;
+	.categories-container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+
+	h1 {
+		text-align: center;
+		margin-bottom: 2rem;
+	}
+
+	.image-container {
+		width: 90%;
+		min-width: 280px;
+		max-width: 400px;
+	}
+
+	img {
+		width: 100%;
+	}
 }
 </style>

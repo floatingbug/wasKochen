@@ -4,12 +4,13 @@ import {useRouter, useRoute} from "vue-router";
 import Filter from "./filter/Filter.vue";
 import {foundDishes} from "@/stores/dishStore.js";
 import DishCard from "@/components/DishCard.vue";
-import device from "@/utils/device.js";
+import useDevice from "@/composables/useDevice.js";
 
 
 const API_URL = ref(import.meta.env.VITE_API_URL);
 const router = useRouter();
 const route = useRoute();
+const {displaySize} = useDevice();
 const recipeName = ref("");
 const isFilterOpen = ref(false);
 const mealId = ref("");
@@ -52,7 +53,6 @@ watch(recipeName, async () => {
 		}
 
 		foundDishes.value = result.data.dishes;
-		console.log(foundDishes.value);
 	}
 	catch(error){
 		console.log(error);
@@ -62,7 +62,9 @@ watch(recipeName, async () => {
 
 
 function openDish(dishId){
-	router.push(`/dish-page?dishId=${dishId}`);
+	if(!mealId.value){
+		router.push(`/dish-page?dishId=${dishId}`);
+	}
 }
 
 function addMealToPlan(dishId){
@@ -73,38 +75,47 @@ function addMealToPlan(dishId){
 
 <template>    
 	<div class="container">
-		<div class="open-filter-button">
-			<Button v-if="device === 'mobile'"
-				variant="text"
-				@click="isFilterOpen = true;"
-			>
-				Filter öffnen
-				<i class="pi pi-chevron-right"></i>
-			</Button>
-		</div>
-
 		<div class="content-left" 
-			:class="device === 'mobile' ? 'card-bg-glass' : '', isFilterOpen || device === 'desktop' ? 'open-filter' : ''"
-			@click="isFilterOpen = !isFilterOpen"
+			:class="displaySize < 1024 ? 'card-bg' : '', isFilterOpen || displaySize >= 1024 ? 'open-filter' : ''"
 		>
-			<Button v-if="device === 'mobile'"
-				variant="outlined"
-				rounded
-			>
-				<i class="pi pi-chevron-left"></i>
-			</Button>
-			<h1>Filter</h1>
+			<div class="filter-header">
+				<h1>Filter</h1>
+
+				<Button 
+					v-if="displaySize < 1024"
+					variant="outlined"
+					rounded
+					@click="isFilterOpen = false"
+				>
+					<i class="pi pi-chevron-left"></i>
+				</Button>
+			</div>
+
+			<div class="found-dishes">
+				<span>Gefuntene gerichte: </span>
+				{{foundDishes.length}}
+			</div>
 
 			<Divider></Divider>
 
 			<Filter></Filter>
 		</div>
 
-		<Divider v-if="device === 'desktop'" layout="vertical"></Divider>
+		<Divider v-if="displaySize >= 1024" layout="vertical"></Divider>
 			
 		<div class="content-right">
 			<div class="find-dishes-container">
-				<header>
+				<div class="find-dishes-header">
+					<div class="open-filter-button">
+						<Button v-if="displaySize < 1024"
+							variant="text"
+							@click="isFilterOpen = true;"
+						>
+							Filter öffnen
+							<i class="pi pi-chevron-right"></i>
+						</Button>
+					</div>
+
 					<InputGroup>
 						<InputGroupAddon>
 							<i class="pi pi-search"></i>
@@ -119,16 +130,20 @@ function addMealToPlan(dishId){
 						</FloatLabel>
 					</InputGroup>
 					
-					<Divider style="margin-top: 3rem;"></Divider>
-				</header>
+					<Divider></Divider>
+				</div>
 			
 			
 				<div class="dishes-container">
 					<DishCard 
 						v-for="(dish, index) in foundDishes" :key="index" 
 						:dish="dish"
+						:isRatingReadOnly="true"
+						:isAddMealButtonActive="mealId ? true : false"
+						:isCardHover="mealId ? false : true"
+						@click="openDish(dish.dishId)"
 					>
-						<template v-if="mealId" #buttons>
+						<template v-if="mealId" #addMealButton>
 							<Button @click="addMealToPlan(dish.dishId)">
 								hinzufügen
 							</Button>
@@ -165,6 +180,23 @@ function addMealToPlan(dishId){
 	transition: transform 250ms;
 }
 
+.filter-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.find-dishes-header {
+	width: 90%;
+	display: flex;
+	flex-direction: column;
+
+	.p-button {
+		padding-left: 0;
+	}
+}
+
+
 .open-filter {
 	transform: translateX(0);
 }
@@ -172,7 +204,6 @@ function addMealToPlan(dishId){
 .content-right {
 	display: flex;
 	justify-content: center;
-	margin-top: 5rem;
 }
 
 .find-dishes-container {
@@ -180,7 +211,6 @@ function addMealToPlan(dishId){
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
 	overflow: hidden;
 }
 
@@ -194,24 +224,17 @@ function addMealToPlan(dishId){
 	justify-content: center;
 	flex-wrap: wrap;
 	gap: 3rem;
-	margin-top: 2rem;
+	margin-top: 1rem;
 }
 
 .input-search-field {
 	margin-top: 2rem;
 }
 
-.content-left .p-button {
-	position: absolute;
-	top: 1rem;
-	right: 1rem;
-	border-color: var(--p-primary-color);
-}
-
 .open-filter-button {
-	position: absolute;
-	left: 1rem;
-	top: 1.5rem;
+	align-self: flex-start;
+	margin-bottom: 0.5rem;
+	z-index: 500;
 }
 
 @media(min-width: 768px) {
@@ -229,6 +252,16 @@ function addMealToPlan(dishId){
 		width: 70%;
 		position: static;
 		margin: 0;
+	}
+}
+
+@media(min-width: 1150px) {
+	.find-dishes-container {
+		margin-top: 2rem;
+	}
+
+	.dishes-container {
+		margin-top: 1rem;
 	}
 }
 </style>

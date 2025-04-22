@@ -1,10 +1,19 @@
 <script setup>
 import {ref} from "vue";
+import Rating from "./Rating.vue";
 
 
 const props = defineProps({
 	dish: Object,
+	isRatingReadOnly: Boolean,
+	isAddMealButtonActive: Boolean,
+	isCardHover: { 
+		type: Boolean,
+		default: true,
+	},
 });
+
+
 
 
 const API_URL = ref(import.meta.env.VITE_API_URL);
@@ -12,146 +21,202 @@ const IMAGE_NAME_STARTS_WITH = import.meta.env.VITE_IMAGE_NAME_STARTS_WITH;
 
 </script>
 
+<template>                                                                            
+	<div 
+		class="dish-card card-bg-glass"
+		:class="isCardHover ? 'dish-card-hover' : ''"
+	>                                             
+        <div class="dish-card-header">                                                                      
+            <img                                                                      
+                v-if="dish.dish.dishImageUrl.startsWith(IMAGE_NAME_STARTS_WITH)"      
+				:src="`${dish.dish.dishImageUrl}`" alt=""
+			>                            
+            <img                                                                      
+                v-else                                                                
+				:src="`${API_URL}${dish.dish.dishImageUrl}`" alt=""
+			>                  
 
-<template>    
-	<div class="dish-card card-bg-glass">
+			<div 
+				v-if="isAddMealButtonActive"
+				class="add-dish-button-container card-bg-glass"
+			>
+            	<slot name="addMealButton">                                                     
+            	</slot>                                                                   
+            </div>
+        </div>                                                                     
+                                                                                      
+        <div class="dish-card-body">                                                                        
+			<div class="dish-rating">                                                   
+				<Rating :isReadOnly="isRatingReadOnly"></Rating>
+				<span>&nbsp keine Bewertung.</span>
+			</div>                                                                
 
-		<div class="card-top">
-			<img
-				v-if="dish.dish.dishImageUrl.startsWith(IMAGE_NAME_STARTS_WITH)"
-				:src="`${dish.dish.dishImageUrl}`" alt="">
-			<img
-				v-else
-				:src="`${API_URL}${dish.dish.dishImageUrl}`" alt="">
-		</div>
-		
-		<div class="card-bottom">
-			<h3>{{dish.dish.recipeName}}</h3>
+            <div class="dish-content">                                                         
+                <div class="dish-info">                                                    
+                    <span class="dish-title">{{dish.dish.recipeName}}</span>  
+                                                                                      
+                    <div class="dish-description">                                         
+                        {{dish.dish.description}}                                     
+                    </div>                                                            
+                </div>                                                                 
+            </div>                                                                    
+                                                                                      
+            <div class="dish-tags">                                                      
+                <Badge                                                                
+                    v-for="(categorie, index) in dish.dish.categories" :key="index"   
+                >                                                                     
+                    {{categorie}}                                                     
+                </Badge>                                                              
+            </div>                                                                    
+        </div>                                                                       
+                                                                                      
+        <div class="dish-card-footer">                                                                      
+            <span v-tooltip="'Portionen'">                                            
+                <i class="pi pi-users"></i>                                           
+                {{dish.dish.portions}}                                                
+            </span>                                                                  
+                                                                                      
+            <span v-tooltip="'Zubereitungszeit'">                                     
+                <i class="pi pi-clock">&nbsp</i>                                      
+                <span v-if="dish.dish.preparationTime > 1">                           
+                    {{dish.dish.preparationTime}}                                     
+                </span>                                                               
+                <span v-else>                                                         
+                    n/A                                                               
+                </span>                                                               
+            </span>                                                                  
+                                                                                      
+            <span v-tooltip="'Schwierigkeitsgrad (von 1 bis 10)'">                    
+                <i class="pi pi-chart-line">&nbsp</i>                                 
+                <span v-if="dish.dish.difficulty > 1">                                
+                    {{dish.dish.difficulty}}                                          
+                </span>                                                               
+                <span v-else>                                                         
+                    n/A                                                               
+                </span>                                                               
+            </span>                                                                  
+                                                                                      
+            <span v-tooltip="'Kilokalorien'">                                         
+                <i class="pi pi-bolt">&nbsp</i>                                       
+                <span v-if="dish.dish.kilocalories > 1">                              
+                    {{dish.dish.kilocalories}}                                        
+                </span>                                                               
+                <span v-else>                                                         
+                    n/A                                                               
+                </span>                                                               
+            </span>                                                                  
+        </div>                                                                     
+    </div>                                                                            
+</template>                                                                           
+                                                                                      
+<style scoped>                                                                        
+.dish-card {                                                                          
+    width: 30%;                                                                       
+    min-width: 280px;                                                                 
+    max-width: 500px;                                                                 
+    height: 450px;                                                                    
+    display: flex;                                                                    
+    flex-direction: column;                                                           
+    align-items: center;                                                              
+    overflow: hidden;                                                                 
+    border-color: var(--border-color);                                                
+	cursor: pointer;
+	transition: 250ms;
+                                                                                      
+    h3 {                                                                              
+        text-align: center;                                                           
+    }                                                                                 
+}                                                                                     
+                                                                                      
+h1 {                                                                                  
+    text-align: center;                                                               
+}                                                                                     
+                                                                                      
+.dish-card-header {                                                                              
+    width: 100%;                                                                      
+    height: 40%;                                                                      
+	position: relative;
+    display: flex;                                                                    
+    justify-content: center;                                                          
+    align-items: center;                                                              
+}                                                                                     
 
-			<div class="description">
-				{{dish.dish.description}}
-			</div>
-
-			<slot name="buttons">
-			</slot>
-			
-			<div class="categories-container">
-				<Badge
-					v-for="(categorie, index) in dish.dish.categories" :key="index"
-				>
-					{{categorie}}
-				</Badge>
-			</div>
-
-			<div class="information-container">
-				<span v-tooltip="'Portionen'">
-					<i class="pi pi-users"></i>
-					{{dish.dish.portions}}
-				</span>
-				
-				<span v-tooltip="'Zubereitungszeit'">
-					<i class="pi pi-clock">&nbsp</i>
-					<span v-if="dish.dish.preparationTime > 1">
-						{{dish.dish.preparationTime}}
-					</span>
-					<span v-else>
-						n/A
-					</span>
-				</span>
-				
-				<span v-tooltip="'Schwierigkeitsgrad (von 1 bis 10)'">
-					<i class="pi pi-chart-line">&nbsp</i>
-					<span v-if="dish.dish.difficulty > 1">
-						{{dish.dish.difficulty}}
-					</span>
-					<span v-else>
-						n/A
-					</span>
-				</span>
-				
-				<span v-tooltip="'Kilokalorien'">
-					<i class="pi pi-bolt">&nbsp</i>
-					<span v-if="dish.dish.kilocalories > 1">
-						{{dish.dish.kilocalories}}
-					</span>
-					<span v-else>
-						n/A
-					</span>
-				</span>
-			</div>
-		</div>
-	</div>
-</template>   
-
-
-<style scoped>
-.dish-card {
-	width: 30%;
-	min-width: 250px;
-	max-width: 500px;
-	min-height: 450px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	overflow: hidden;
-	border-color: var(--border-color);
-
-	h3 {
-		text-align: center;
-	}
+.dish-title {
+	font-size: 1.2rem;
+	color: var(--p-primary-color);
 }
+                                                                                      
+.dish-card-header img {                                                                          
+    width: 100%;                                                                      
+    height: 100%;                                                                     
+    object-fit: cover;                                                                
+}                                                                                     
+                                                                                      
+.dish-card-body {                                                                                
+    width: 100%;                                                                      
+    height: 50%;                                                                      
+    display: flex;                                                                    
+    flex-direction: column;                                                           
+                                                                                      
+}                                                                                     
 
-h1 {
-	text-align: center;
-}
+.dish-content, .dish-tags {                                                                   
+	height: 50%;                                                                  
+	display: flex;                                                                
+																				  
+}                                                                                 
 
-.card-top {
+.dish-info, .dish-rating {                                                               
 	width: 100%;
-	height: 50%;
+	padding: 1rem;                                                            
+	overflow: hidden;
+}                                                                             
+																				  
+.dish-content .dish-info {                                                                      
+	display: flex;                                                                
+	flex-direction: column;                                                       
+	gap: 1rem;                                                                    
+}                                                                                 
+
+.dish-rating {
 	display: flex;
-	justify-content: center;
-	align-items: center;
+}
+																				  
+.dish-tags {                                                                         
+	display: flex;                                                                
+	align-items: center;                                                          
+	flex-wrap: wrap;                                                              
+	gap: 1rem;                                                                    
+	padding: 1rem;                                                                
+	overflow: hidden;                                                               
+}                                                                                 
+
+.dish-tags .p-badge {
+	background-color: rgb(from var(--p-primary-100) r g b / 90%);
 }
 
-.card-top img {
+.add-dish-button-container {
 	width: 100%;
 	height: 100%;
-	object-fit: cover;
-}
-
-.description {
-	width: 100%;
-	text-align: center;
-	margin-bottom: 1rem;
-	padding: 0 1rem;
-}
-
-.card-bottom {
-	width: 100%;
-	height: 50%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.card-bottom .categories-container {
-	width: 80%;
-	height: 30%;
+	position: absolute;
 	display: flex;
 	justify-content: center;
-	flex-wrap: wrap;
-	gap: 1rem;
-	margin: .8rem;
-	overflow: hidden;
+	align-items: center;
 }
+                                                                                      
+.dish-card-footer {                                                                              
+    width: 100%;                                                                      
+    height: 10%;                                                                      
+    display: flex;                                                                    
+    justify-content: space-around;                                                    
+    gap: 1rem;                                                                        
+    border-top: 1px solid var(--border-color);                                        
+    margin-top: auto;                                                                 
+    padding: 1rem;                                                                    
+}                                                                                     
 
-.card-bottom .information-container {
-	width: 100%;
-	display: flex;
-	justify-content: space-around;
-	gap: 1rem;
-	border-top: 1px solid var(--border-color);
-	margin-top: auto;
-	padding: 1rem 0;
+.dish-card.dish-card-hover:hover {
+	transform: scale(1.01);
+	box-shadow: 0 4px 20px var(--p-primary-color);
 }
 </style>

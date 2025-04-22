@@ -8,10 +8,11 @@ function setWeekPlan(plan){
 	weekPlan = reactive(plan);
 }
 
-function setMeal({newMeal, mealId}){
+function setMeal({newMeal, mealId, dishId}){
 	for(const day in weekPlan){
 		for(const mealType in weekPlan[day]){
 			if(weekPlan[day][mealType].id === mealId){
+				weekPlan[day][mealType].dishId = dishId;
 				weekPlan[day][mealType].name = newMeal.recipeName;
 				weekPlan[day][mealType].preparationTime = newMeal.preparationTime;
 				weekPlan[day][mealType].difficulty = newMeal.difficulty;

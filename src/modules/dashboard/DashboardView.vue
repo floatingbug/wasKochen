@@ -66,6 +66,7 @@ function openDish(id){
 				<main>
 					<DishCard
 						v-for="(dish, index) in newestDishes" :key="index"
+						class="dish-card"
 						:dish="dish"
 						@click="openDish(dish.dishId)"
 					>
@@ -82,6 +83,7 @@ function openDish(id){
 					<DishCard
 						v-for="(dish, index) in randomDishes" :key="index"
 						:dish="dish"
+						:isRatingReadOnly="true"
 						@click="openDish(dish.dishId)"
 					>
 					</DishCard>
@@ -101,7 +103,7 @@ function openDish(id){
 }
 
 .content {
-	width: 80%;
+	width: 90%;
 	min-width: 300px;
 	max-width: 1024px;
 	display: flex;
@@ -138,6 +140,5 @@ function openDish(id){
 	gap: 2rem;
 	padding: 2rem;
 	border-radius: 8px;
-	margin-top: 2rem;
 }
 </style>

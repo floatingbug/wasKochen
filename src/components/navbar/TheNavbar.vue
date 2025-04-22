@@ -1,13 +1,17 @@
 <script setup>
 import MobileNavbar from "./components/MobileNavbar.vue";
 import Navbar from "./components/Navbar.vue";
-import device from "../../utils/device.js";
+import useDevice from "@/composables/useDevice.js";
+
+
+const {displaySize} = useDevice();
+
 </script>
 
 
 <template>    
-	<MobileNavbar v-if="device === 'mobile'"></MobileNavbar>
-	<Navbar v-if="device ==='desktop'"></Navbar>
+	<MobileNavbar v-if="displaySize < 1150"></MobileNavbar>
+	<Navbar v-else></Navbar>
 </template>   
 
 

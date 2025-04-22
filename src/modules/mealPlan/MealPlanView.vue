@@ -11,9 +11,8 @@ const isInitialized = ref(false);
 
 
 onMounted(async () => {
-	const fetchedMealPlan = await getWeekPlanAPI({token: user.token});
-
 	if(!weekPlan){
+		const fetchedMealPlan = await getWeekPlanAPI({token: user.token});
 		setWeekPlan(fetchedMealPlan.data.weekPlan);
 	}
 
@@ -24,24 +23,48 @@ onMounted(async () => {
 
 
 <template>    
-	<div class="container">
-		<div class="content">
+	<div class="layout">
+		<h1>Wochenplan</h1>
+
+		<div class="layout-sidebar-left">
+		</div>
+
+		<div class="layout-body">
 			<WeekPlan v-if="isInitialized"></WeekPlan>
+		</div>
+
+		<div class="layout-sidebar-right">
 		</div>
 	</div>
 </template>   
 
 
 <style scoped>
-.container {
+.layout {
 	width: 100%;
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 12rem;
 }
 
-.content {
+.layout-body {	
 	width: 90%;
-	min-width: 300px;
-	max-width: 1500px;
+	display: flex;
+	align-items: center;
+	flex-grow: 0;
+}
+
+@media(min-width: 480px) {
+	h1 {
+		font-size: 3rem;
+	}
+}
+
+@media(min-width: 1024px) {
+	h1 {
+		font-size: 4rem;
+		margin: 4rem 0;
+	}
 }
 </style>

@@ -2,7 +2,7 @@
 import {onMounted} from "vue";
 import { RouterLink, RouterView, useRouter } from 'vue-router'
 import TheNavbar from "./components/navbar/TheNavbar.vue";
-import device from "./utils/device.js";
+import useDevice from "./composables/useDevice.js";
 import Toast from 'primevue/toast';
 import useUser from "@/stores/userStore.js";
 import getWeekPlanAPI from "@/api/getWeekPlanAPI.js";
@@ -10,10 +10,13 @@ import getWeekPlanAPI from "@/api/getWeekPlanAPI.js";
 
 const {user} = useUser();
 const router = useRouter();
+const {device, displaySize} = useDevice();
 
 
 onMounted(async () => {
-	//hangle device
+	//handle device
+	displaySize.value = window.innerWidth;
+
 	if(window.innerWidth < 1150) device.value = "mobile";
 	else device.value = "desktop";
 

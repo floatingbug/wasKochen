@@ -2,9 +2,17 @@
 import {ref} from "vue";
 import useUser from "@/stores/userStore.js";
 import UserMenu from "./UserMenu.vue";
+import navbarButtons from "../data/navbarButtons.js";
 
 
 const {user} = useUser();
+
+
+function activateButton(index){
+	navbarButtons.value.forEach(button => button.isActive = false);
+	navbarButtons.value[index].isActive = true;
+}
+
 </script>
 
 
@@ -12,30 +20,27 @@ const {user} = useUser();
 	<nav>
 		<ul class="menu-container">
 			<li class="container-left">
-				<span>wasKochen</span>
+				<span class="logo">wasKochen</span>
 			</li>
 
 			<!-- buttons for signed in users -->
 			<li v-if="user.isSignedIn">
 				<ul class="container-right">
-					<li>
-						<Button as="router-link" to="/dashboard" variant="text" raised>Start</Button>
-					</li>
-					
-					<li>
-						<Button as="router-link" to="/meal-plan" variant="text" raised>Wochenplaner</Button>
-					</li>
-					
-					<li>
-						<Button as="router-link" to="/dish/find-dishes" variant="text" raised>Gerichte Finden</Button>
-					</li>
-					
-					<li>
-						<Button as="router-link" to="/dish/manage-dishes" variant="text" raised>Gerichte Verwalten</Button>
-					</li>
-
-					<li>
-						<Button as="router-link" to="/dish/add-dish" variant="text" raised>Gericht Hinzufügen</Button>
+					<li 
+						class="navigation-button"
+						:class="{'active-button': button.isActive}"
+						v-for="(button, index) in navbarButtons"
+						:key="index"
+					>
+						<Button 
+							as="router-link" 
+							:to="button.url" 
+							severity="contrast"
+							variant="text" 
+							@click="activateButton(index)"
+						>
+							{{button.label}}
+						</Button>
 					</li>
 
 					<li class="user-menu">
@@ -47,11 +52,18 @@ const {user} = useUser();
 			<!-- buttons for signed out  users -->
 			<li v-else>
 				<div class="container-right">
-					<Button as="router-link" to="/auth/sign-in">
+					<Button 
+						as="router-link" 
+						to="/auth/sign-in"
+					>
 						Anmelden
 					</Button>
 
-					<Button as="router-link" to="/auth/sign-up">
+					<Button 
+						as="router-link" 
+						to="/auth/sign-up"
+						variant="text"
+					>
 						Registrieren
 					</Button>
 				</div>
@@ -79,6 +91,10 @@ ul {
 	list-style: none;
 }
 
+.logo {
+	color: var(--p-primary-color);
+}
+
 .menu-container {
 	width: 100%;
 	height: 100%;
@@ -97,7 +113,6 @@ ul {
 
 	li {
 		min-width: 150px;
-
 	}
 	
 	.p-button {
@@ -118,5 +133,31 @@ ul {
 	span {
 		font-size: 1.4rem;
 	}
+}
+
+.navigation-button {
+	position: relative;
+}
+
+.navigation-button:before {
+	width: 90%;
+	height: 1px;
+	position: absolute;
+	bottom: 0;
+	content: "";
+	margin-left: 5%;
+	transform: translateY(5px) scale(0, 1);
+	background-color: var(--p-primary-color);
+	transition: 250ms;
+}
+
+.navigation-button:hover:before {
+	transform: translateY(5px) scale(1, 1);
+	margin-left: 5%;
+}
+
+.active-button:before {
+	transform: translateY(5px) scale(1, 1);
+	margin-left: 5%;
 }
 </style>

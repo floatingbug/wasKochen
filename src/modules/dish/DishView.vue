@@ -7,11 +7,7 @@ import ManageDishes from "./manageDishes/ManageDishes.vue";
 
 
 <template>    
-	<div class="tabs-container">
-		<div class="tabs-content">
-			<Router-view></Router-view>
-		</div>
-	</div>
+	<Router-view></Router-view>
 </template>   
 
 
