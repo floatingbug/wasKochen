@@ -24,6 +24,7 @@ watchEffect(async () => {
 		setMeal({
 			newMeal: dish,
 			mealId,
+			dishId,
 		});
 
 		//store weekPlan on Server
