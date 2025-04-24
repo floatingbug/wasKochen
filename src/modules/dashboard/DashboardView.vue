@@ -100,6 +100,7 @@ function openDish(id){
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin-bottom: 12rem;
 }
 
 .content {

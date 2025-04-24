@@ -81,6 +81,7 @@ async function signIn(){
 	flex-direction: column;
 	align-items: center;
 	padding: 2rem 0;
+	margin-bottom: 34rem;
 }
 
 main {

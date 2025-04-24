@@ -69,8 +69,13 @@ async function submit(){
 				<router-link to="/auth/sign-in">Anmelden</router-link>
 			</p>
 		</main>
+		
 
 		<footer>
+			<div class="privacy-container">
+				I have read and agree to the <a href="/privacy-policy" target="_blank">Privacy Policy</a>.
+			</div>
+
 			<Button @click="submit">Registrieren</Button>
 		</footer>
 	</div>
@@ -86,7 +91,7 @@ async function submit(){
 	flex-direction: column;
 	align-items: center;
 	padding: 2rem 0;
-	margin-bottom: 12rem;
+	margin-bottom: 22rem;
 }
 
 main {
@@ -100,8 +105,9 @@ main {
 footer {
 	width: 80%;
 	display: flex;
-	justify-content: flex-end;
-	gap: 1rem;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 3rem;
 	margin-top: 4rem;
 }
 

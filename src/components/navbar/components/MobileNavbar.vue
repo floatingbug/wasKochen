@@ -48,7 +48,7 @@ function closeNavbar(event){
 							variant="text"
 							@click="isNavbarClose = true;"
 						>
-							<i class="pi pi-times" style="font-size: 2rem;"></i>
+							<i class="pi pi-times" style="font-size: 2rem; color: var(--text-color)"></i>
 						</Button>
 					</li>
 				</ul>
@@ -152,7 +152,9 @@ nav {
 
 .nav-content {
 	width: 100%;
+	height: 100dvh;
 	position: absolute;
+	top: 0;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -162,7 +164,7 @@ nav {
 }
 
 .nav-open {
-	transform: translateY(42%);
+	transform: translateY(0);
 }
 
 .nav-content .header {
@@ -203,5 +205,12 @@ nav {
 .user-menu {
 	width: 50px;
 	margin-left: auto;
+}
+
+@media(min-width: 480px) {
+	.nav-content {
+		width: 60%;
+		height: 60dvh;
+	}
 }
 </style>

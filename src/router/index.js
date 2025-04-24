@@ -6,6 +6,7 @@ import dishPageRoutes from "../modules/dish/dishPage/router/index.js";
 import authRoutes from "../modules/auth/router/index.js";
 import groupsRoutes from "../modules/groups/router/index.js";
 import mealPlanRoutes from "../modules/mealPlan/router/index.js";
+import legalInformationRoutes from "../modules/legalinformations/router/index.js";
 
 
 const router = createRouter({
@@ -18,6 +19,7 @@ const router = createRouter({
 		...dishPageRoutes,
 		...groupsRoutes,
 		...mealPlanRoutes,
+	  	...legalInformationRoutes,
 	],
 })
 

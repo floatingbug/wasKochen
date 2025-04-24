@@ -6,6 +6,7 @@ import useDevice from "./composables/useDevice.js";
 import Toast from 'primevue/toast';
 import useUser from "@/stores/userStore.js";
 import getWeekPlanAPI from "@/api/getWeekPlanAPI.js";
+import Footer from "@/components/footer/Footer.vue";
 
 
 const {user} = useUser();
@@ -44,6 +45,8 @@ onMounted(async () => {
 	<TheNavbar></TheNavbar>
 
   <RouterView />
+
+  <Footer></Footer>
 </template>
 
 <style scoped>
