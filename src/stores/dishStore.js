@@ -7,7 +7,7 @@ const foundDishes = ref([]);
 
 const dish = reactive({
 	recipeName: "",
-	descriptions: "",
+	description: "",
 	portions: 1,
 	difficulty: 1,
 	preparationTime: 0,
@@ -25,5 +25,25 @@ const dish = reactive({
 });
 
 
-export {dishImage, foundDishes}
+function resetDish() {
+    dish.recipeName = "";
+    dish.description = "";
+    dish.portions = 1;
+    dish.difficulty = 1;
+    dish.preparationTime = 0;
+    dish.kilocalories = 1;
+    dish.ingredients = [
+        {
+            quantity: 1,
+            unit: "kg",
+            ingredientName: "",
+        },
+    ];
+    dish.preparation = "";
+    dish.categories = [];
+    dish.dishImageUrl = "";
+}
+
+
+export {dishImage, foundDishes, resetDish}
 export default dish;

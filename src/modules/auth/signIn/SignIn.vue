@@ -35,7 +35,7 @@ async function signIn(){
 	<div class="content card-bg-glass">
 		<h1>Anmelden</h1>
 
-		<main>
+		<div class="sign-in-body-top">
 			<InputGroup>
 				<InputGroupAddon>
 					<i class="pi pi-id-card"></i>
@@ -57,17 +57,17 @@ async function signIn(){
 					<label for="password">Passwort</label>
 				</FloatLabel>
 			</InputGroup>
+		</div>
+		
+		<Divider></Divider>
 
-			<Divider></Divider>
-			
+		<div class="sign-in-body-bottom">
 			<p>Du hast noch kein Account? 
 				<router-link to="/auth/sign-up">Registrieren</router-link>
 			</p>
-		</main>
 
-		<footer>
 			<Button @click="signIn">Anmelden</Button>
-		</footer>
+		</div>
 	</div>
 </template>   
 
@@ -77,30 +77,30 @@ async function signIn(){
 	width: 90%;
 	min-width: 280px;
 	max-width: 800px;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	padding: 2rem 0;
-	margin-bottom: 34rem;
 }
 
-main {
+.sign-in-body-top {
 	width: 80%;
 	display: flex;
 	flex-direction: column;
-	gap: 2rem;
-	margin-top: 2rem;
+	gap: 1.8rem;
+	margin: 1rem 0;
 }
 
-footer {
+.sign-in-body-bottom {
 	width: 80%;
 	display: flex;
-	justify-content: flex-end;
+	flex-direction: column;
+	align-items: flex-end;
 	gap: 1rem;
-	margin-top: 4rem;
 }
 
-footer .p-button {
+.sign-in-body-bottom .p-button {
 	width: 50%;
 }
 </style>

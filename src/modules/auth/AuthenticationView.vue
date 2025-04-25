@@ -12,10 +12,11 @@
 <style scoped>
 .auth-container {
 	width: 100%;
+	min-height: 100dvh;
 	display: flex;
 	justify-content: center;
-	align-items: center;
 	margin-top: 1rem;
+	margin-bottom: 12rem;
 }
 
 @media(min-width: 768px){

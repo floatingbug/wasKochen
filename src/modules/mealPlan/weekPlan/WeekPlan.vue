@@ -85,11 +85,11 @@ function openRecipe(dishId){
 			<div class="day">
 				<h3>Frühstück</h3>
 				<div v-if="!day.breakfast.name" class="choose-meal">
-					<Button severity="secondary" variant="outlined" @click="addDish(day.breakfast.id)">
+					<Button severity="contrast" variant="outlined" @click="addDish(day.breakfast.id)">
 						Gericht hinzufügen
 					</Button>
 
-					<Button severity="secondary" variant="outlined" @click="createRandomMeal(day.breakfast.id)">
+					<Button severity="contrast" variant="outlined" @click="createRandomMeal(day.breakfast.id)">
 						Zufälliges Gericht
 					</Button>
 				</div>
@@ -119,11 +119,11 @@ function openRecipe(dishId){
 			<div class="day">
 				<h3>Mitagessen</h3>
 				<div v-if="!day.lunch.name" class="choose-meal">
-					<Button severity="secondary" variant="outlined" @click="addDish(day.lunch.id)">
+					<Button severity="contrast" variant="outlined" @click="addDish(day.lunch.id)">
 						Gericht hinzufügen
 					</Button>
 
-					<Button severity="secondary" variant="outlined" @click="createRandomMeal(day.lunch.id)">
+					<Button severity="contrast" variant="outlined" @click="createRandomMeal(day.lunch.id)">
 						Zufälliges Gericht
 					</Button>
 				</div>
@@ -153,11 +153,11 @@ function openRecipe(dishId){
 			<div class="day">
 				<h3>Abendessen</h3>
 				<div v-if="!day.dinner.name" class="choose-meal">
-					<Button severity="secondary" variant="outlined" @click="addDish(day.dinner.id)">
+					<Button severity="contrast" variant="outlined" @click="addDish(day.dinner.id)">
 						Gericht hinzufügen
 					</Button>
 
-					<Button severity="secondary" variant="outlined" @click="createRandomMeal(day.dinner.id)">
+					<Button severity="contrast" variant="outlined" @click="createRandomMeal(day.dinner.id)">
 						Zufälliges Gericht
 					</Button>
 				</div>
@@ -200,7 +200,7 @@ function openRecipe(dishId){
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	padding: 1rem;
+	overflow: hidden;
 }
 
 .choose-meal {
@@ -220,16 +220,19 @@ function openRecipe(dishId){
 	}
 }
 
+.day:last-child {
+	padding-bottom: 1rem;
+}
+
 .manage-meal .p-button {
 	padding: 0;
 }
 
 h1 {
-	border-radius: var(--border-radius);
 	padding: 0.3rem 1rem;
 	margin: 0 0 1rem 0;
-	color: var(--p-primary-color);
-	background-color: var(--background-surface);
+	color: var(--text-color);
+	background-color: var(--text-bg);
 }
 
 
@@ -238,5 +241,11 @@ h1 {
 	justify-content: space-between;
 	align-items: center;
 	gap: 1rem;
+}
+
+.meal-entry {
+	.p-button {
+		color: var(--text-color);
+	}
 }
 </style>

@@ -96,6 +96,7 @@ onMounted(async () => {
 <style scoped>
 .layout-content {
 	width: 100%;
+	min-height: 100dvh;
 	display: flex;
 	justify-content: center;
 	margin-bottom: 12rem;

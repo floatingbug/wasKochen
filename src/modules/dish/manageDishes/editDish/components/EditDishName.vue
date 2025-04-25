@@ -1,6 +1,7 @@
 <script setup>
 import SubmitOrCancel from "./SubmitOrCancel.vue";
 import { useToast } from 'primevue/usetoast';
+import useUser from "@/stores/userStore.js";
 
 
 const props = defineProps({
@@ -12,6 +13,7 @@ const emit = defineEmits(["editDishName:action"]);
 
 
 const toast = useToast();
+const {user} = useUser();
 const headerCopy = JSON.parse(JSON.stringify(props.dish.dish.recipeName))
 
 
@@ -32,8 +34,10 @@ async function updateRecipeName(){
 			method: "PATCH",
 			headers: {
 				"content-type": "application/json",
+				authorization: user.token,
 			},
 			body: JSON.stringify({
+				token: user.token,
 				dishId: props.dish.dishId,
 				updateProperty: "recipeName",
 				update: props.dish.dish.recipeName,

@@ -14,7 +14,7 @@ import RecipeImageUpload from "./components/RecipeImageUpload.vue";
 import Preview from "./components/Preview.vue";
 import dishStore from "@/stores/dishStore.js";
 import {dishImage} from "@/stores/dishStore.js";
-import {foundDishes} from "@/stores/dishStore.js";
+import {foundDishes, resetDish} from "@/stores/dishStore.js";
 
 
 const router = useRouter();
@@ -87,6 +87,8 @@ async function saveDish(){
 		console.log(error);
 		return;
 	}
+
+	resetDish();
 
 	router.push(`/dish-page?dishId=${addedDish.dishId}`);
 }
@@ -189,6 +191,7 @@ h1 {
 
 .add-dish-container {
 	width: 100%;
+	min-height: 100dvh;
 	display: flex;
 	justify-content: center;
 	margin-bottom: 12rem;
@@ -204,6 +207,11 @@ h1 {
 
 .p-stepper {
 	width: 100%;
+}
+
+:deep(.p-steppanel) {
+	background-color: var(--background-surface);
+	border-right: 1px solid var(--border-color);
 }
 
 .button-container {

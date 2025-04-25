@@ -143,7 +143,7 @@ h1 {
 
 .dish-title {
 	font-size: 1.2rem;
-	color: var(--p-primary-color);
+	color: var(--text-contrast);
 }
                                                                                       
 .dish-card-header img {                                                                          
@@ -192,7 +192,7 @@ h1 {
 }                                                                                 
 
 .dish-tags .p-badge {
-	background-color: rgb(from var(--p-primary-100) r g b / 90%);
+	background-color: var(--dish-tag-color);
 }
 
 .add-dish-button-container {

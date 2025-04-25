@@ -97,6 +97,7 @@ function openDish(id){
 <style scoped>
 .container {
 	width: 100%;
+	min-height: 100dvh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -125,11 +126,10 @@ function openDish(id){
 	border-radius: 8px;
 	border: 1px solid var(--border-color);
 	margin-top: 2rem;
-	background-color: var(--background-surface);
+	background-color: var(--text-bg);
 }
 
 .dishes header h1 {
-	color: var(--p-primary-color);
 	margin: 0;
 }
 

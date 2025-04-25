@@ -8,6 +8,7 @@ import EditImage from "./components/EditImage.vue";
 import EditCategories from "./components/EditCategories.vue";
 import EditPreparation from "./components/EditPreparation.vue";
 import EditDishName from "./components/EditDishName.vue";
+import useUser from "@/stores/userStore.js";
 
 const props = defineProps({
 	dish: Object,
@@ -18,6 +19,8 @@ const props = defineProps({
 const emit = defineEmits(["editDish:action"]);
 
 
+const {user} = useUser();
+
 const handleEvents = {
 	dishMenu: function(event){
 		if(event.action === "delete"){
@@ -27,6 +30,7 @@ const handleEvents = {
 
 	editDishName: function(event){
 		if(event.action === "change"){
+			console.log("test");
 		}
 	}
 }
@@ -38,8 +42,12 @@ async function deleteDish(){
 			method: "delete",
 			headers: {
 				"content-type": "application/json",
+				authorization: user.token,
 			},
-			body: JSON.stringify({dishId: props.dish.dishId})
+			body: JSON.stringify({
+				token: user.token,
+				dishId: props.dish.dishId
+			})
 		});
 
 		const result = await response.json();

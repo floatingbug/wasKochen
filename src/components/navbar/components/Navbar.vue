@@ -36,7 +36,7 @@ function activateButton(index){
 							as="router-link" 
 							:to="button.url" 
 							severity="contrast"
-							variant="text" 
+							variant="link" 
 							@click="activateButton(index)"
 						>
 							{{button.label}}

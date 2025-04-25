@@ -3,6 +3,7 @@ import {ref, toRaw} from "vue";
 import Select from "primevue/select";
 import SubmitOrCancel from "./SubmitOrCancel.vue";
 import { useToast } from 'primevue/usetoast';
+import useUser from "@/stores/userStore.js";
 
 
 const props = defineProps({
@@ -11,6 +12,7 @@ const props = defineProps({
 
 
 const toast = useToast();
+const {user} = useUser();
 const ingredientsCopy = JSON.parse(JSON.stringify(props.dish.dish.ingredients));
 const units = ref([
 	{
@@ -45,8 +47,10 @@ async function updateIngredientsAPI(){
 			method: "PATCH",
 			headers: {
 				"content-type": "application/json",
+				authorization: user.token,
 			},
 			body: JSON.stringify({
+				token: user.token,
 				dishId: props.dish.dishId,
 				updateProperty: "ingredients",
 				update: props.dish.dish.ingredients,

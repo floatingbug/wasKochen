@@ -3,6 +3,7 @@ import {ref, onMounted, watch} from "vue";
 import categorieTags from "@/data/categorieTags.js";
 import SubmitOrCancel from "./SubmitOrCancel.vue";
 import { useToast } from 'primevue/usetoast';
+import useUser from "@/stores/userStore.js";
 
 
 const props = defineProps({
@@ -10,6 +11,7 @@ const props = defineProps({
 });
 
 
+const {user} = useUser();
 const toast = useToast();
 const categorieTagsCopy = ref([]);
 let categoriesCopy = JSON.parse(JSON.stringify(props.dish.dish.categories));
@@ -64,6 +66,7 @@ async function updateCategoriesAPI({categories}){
 			method: "PATCH",
 			headers: {
 				"content-type": "application/json",
+				authorization: user.token,
 			},
 			body: JSON.stringify({
 				dishId: props.dish.dishId,

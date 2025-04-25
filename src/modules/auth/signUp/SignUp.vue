@@ -65,13 +65,14 @@ async function submit(){
 
 			<Divider></Divider>
 
-			<p>Du bist bereits registriert? 
-				<router-link to="/auth/sign-in">Anmelden</router-link>
-			</p>
 		</main>
 		
 
 		<footer>
+			<p>Du bist bereits registriert? 
+				<router-link to="/auth/sign-in">Anmelden</router-link>
+			</p>
+			
 			<div class="privacy-container">
 				I have read and agree to the <a href="/privacy-policy" target="_blank">Privacy Policy</a>.
 			</div>
@@ -87,11 +88,11 @@ async function submit(){
 	width: 90%;
 	min-width: 280px;
 	max-width: 800px;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	padding: 2rem 0;
-	margin-bottom: 22rem;
 }
 
 main {
@@ -107,11 +108,13 @@ footer {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
-	gap: 3rem;
-	margin-top: 4rem;
 }
 
 footer .p-button {
 	width: 50%;
+}
+
+.privacy-container {
+	margin: 3rem 0 1rem 0;
 }
 </style>

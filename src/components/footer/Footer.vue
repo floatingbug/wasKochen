@@ -7,8 +7,6 @@
         <div class="footer-copyright">
             <p>
                 Copyright © 2024. 
-            </p>
-            <p>
                 All rights reserved.
             </p>
         </div>
@@ -33,7 +31,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: var(--bg-color);
+    background-color: var(--footer-bg-color);
 }
 
 .footer-copyright {
