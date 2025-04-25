@@ -3,8 +3,10 @@ import {ref, reactive, onMounted} from "vue";
 import EditDish from "./editDish/EditDish.vue";
 import {foundDishes} from "@/stores/dishStore.js";
 import DishCard from "@/components/DishCard.vue";
+import useUser from "@/stores/userStore.js";
 
 
+const {user} = useUser();
 const dishes = ref([]);
 let dish = null;
 const isVisible= ref(false);
@@ -13,8 +15,11 @@ const API_URL = ref(import.meta.env.VITE_API_URL);
 
 onMounted(async () => {
 	try{
-		const response = await fetch(`${import.meta.env.VITE_API_URL}/dish`, {
-			method: "GET"
+		const response = await fetch(`${import.meta.env.VITE_API_URL}/dish/get-own-dishes`, {
+			method: "GET",
+			headers: {
+				authorization: user.token,
+			}
 		});
 		const result = await response.json();
 		
